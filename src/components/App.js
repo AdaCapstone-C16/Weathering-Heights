@@ -17,6 +17,7 @@ import MyProfile from './MyProfile';
 // import Thanks from './Thanks'
 import Map from './Map'
 import UpdateWeatherButton from './UpdateWeatherButton.js';
+import { createBrowserHistory } from "history";
 // import FIREBASE_API_KEY from './firebase_api_key.js';
 
 function App() {
@@ -77,6 +78,8 @@ function App() {
     setUpdateWeather(updateWeather + 1);
   }
 
+  const history = createBrowserHistory();
+
   return (
       // <Container className="d-flex align-items-center" style={{ minHeight: "100vh" }}>
       // <Container>
@@ -89,8 +92,7 @@ function App() {
 
         <div>
           {/* <Router basename="/Weathering-Heights"> */}
-          <Router>
-            
+          <Router basename='/Weathering-Heights' history={history}>
             <AuthProvider>
               <Navigation />
               <Routes>

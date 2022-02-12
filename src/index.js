@@ -2,17 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { Router, BrowserRouter, HashRouter } from "react-router-dom";
+// import { Router, BrowserRouter, HashRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createBrowserHistory } from "history";
+// import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router basename="/Weathering-Heights" history={history}>
+    {/* <BrowserRouter basename="/Weathering-Heights" history={history}> */}
       <App />
-    </Router>
+    {/* </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
