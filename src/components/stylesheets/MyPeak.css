@@ -1,0 +1,32 @@
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.accordion-top {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #DEDFEC;
+    border-radius: 12px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    padding:2%;
+}
+
+.peak-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+}
+
+
+.summit-btn {
+    width:105%;
+    margin-left: 20%;
+}
+
+.tcontainer {
+    display: flex;
+    padding-left: 25%;
+    }

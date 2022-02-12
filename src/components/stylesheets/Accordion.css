@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,500');
+.accordion-card{
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+.accordion-title{
+    margin-left: 3%;
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-bottom: 2%;
+    text-align: left;
+}
+
+.sort-form{
+    padding-right: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}

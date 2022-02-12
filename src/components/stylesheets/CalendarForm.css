@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+.google-form{
+    position: flex;
+    display: grid;
+    padding: 1em;
+    background: #f9f9f9;
+    border: 1px solid #c1c1c1;
+    padding: 1em;
+    border-radius: 10px;
+    grid-template-columns: max-content 1fr;
+    grid-column-gap: 1em;
+    background-color: #DEDFEC;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+.google-form-desc{
+    padding-bottom: 5%;
+}
+.google-form-title{
+    font-weight: bolder;
+    text-align: center;
+    padding-right: 15%;
+    padding-bottom: 3%;
+}
+.google-form-button{
+    float: right;
+}

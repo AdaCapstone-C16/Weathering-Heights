@@ -1,0 +1,66 @@
+/* button:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+    border-radius: 66px;
+} */
+
+/* button {
+    display: inline-block;
+    outline: none;
+    border-radius: 66px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+} */
+
+
+.button {
+    margin: 5%;
+    display: inline-block;    
+    border-radius: 66px;
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+.button:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}
+.tcontainer {
+display: flex;
+flex-direction: row;
+justify-content: space-between
+}
