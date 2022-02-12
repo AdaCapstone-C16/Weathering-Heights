@@ -98,7 +98,7 @@ function App() {
                 </Route>
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/login" element={<Login/>} />
-                <Route exxact path="/map" element={<Map/>}/>
+                <Route exact path="/map" element={<Map/>}/>
                 {/* <Route path="/thanks" element={<Thanks/>}/> */}
                 <Route path="/" element={<Homepage data={peakList}/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
