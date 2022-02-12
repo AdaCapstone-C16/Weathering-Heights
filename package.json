@@ -35,11 +35,10 @@
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
-    "deploy":"gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": [
@@ -62,13 +61,10 @@
   "devDependencies": {
     "html-loader": "^3.1.0"
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Weekend Weather App for a safe summit.",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AdaCapstone-C16/Weathering-Heights.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/AdaCapstone-C16/Weathering-Heights.git",
+  "author": "Areeba Rashid, Roslyn Melookaran, Lia Gaetano",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AdaCapstone-C16/Weathering-Heights/issues"

@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import './stylesheets/CalendarForm.css';
 import { FiAlignRight } from 'react-icons/fi';
 // require('dotenv').config();
-import KEYS from './firebase_api_key'
+// import KEYS from './firebase_api_key'
     function CalendarForm(props) {
     //gapi window
     var gapi = window.gapi
@@ -70,8 +70,8 @@ import KEYS from './firebase_api_key'
         // })
 
         gapi.client.init({
-            apiKey: KEYS['GOOGLE_API_KEY'],
-            clientId: KEYS['GOOGLE_ClIENT_ID'],
+            // apiKey: KEYS['GOOGLE_API_KEY'],
+            // clientId: KEYS['GOOGLE_ClIENT_ID'],
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES,
         })

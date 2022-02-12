@@ -17,10 +17,10 @@ import MyProfile from './MyProfile';
 // import Thanks from './Thanks'
 import Map from './Map'
 import UpdateWeatherButton from './UpdateWeatherButton.js';
-import FIREBASE_API_KEY from './firebase_api_key.js';
+// import FIREBASE_API_KEY from './firebase_api_key.js';
 
 function App() {
-  console.log(FIREBASE_API_KEY)
+  // console.log(FIREBASE_API_KEY)
   const [peakList, setPeakList] = useState([]);
   const [coordinates, setCoordinates] = useState([]);
 
