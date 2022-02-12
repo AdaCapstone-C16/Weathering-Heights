@@ -88,7 +88,8 @@ function App() {
       //     signalDBPull={signalDBPull} />
 
         <div>
-          <Router basename="/Weathering-Heights">
+          {/* <Router basename="/Weathering-Heights"> */}
+          <Router>
             
             <AuthProvider>
               <Navigation />
