@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import '../components/stylesheets/PopUps.css';
@@ -30,7 +30,7 @@ export default function Login() {
     }
     
 return (
-    <section>
+    <Container>
         <Card id="login-card">
             <Card.Body>
                 <h2 className='popup-header text-center mb-4'> Login</h2>
@@ -62,8 +62,7 @@ return (
                 </div>
             </Card.Body>
         </Card>
-        
-    </section>
+    </Container>
     
     )
 }

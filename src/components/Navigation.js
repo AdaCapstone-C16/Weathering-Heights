@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
@@ -25,7 +24,6 @@ const Navigation = () => {
     } else {
       homeOnlyNavView = false;
     }
-    
 
     return (
         <Navbar id="navigation" className="justify-content-between">
