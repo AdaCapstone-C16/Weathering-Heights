@@ -29,8 +29,8 @@ const AddSummit = ({trigger, setTrigger, data, handleAddSummit}) => {
                     <Select options={data} onChange={handleSummitAdd}/>
                 </form>
                 <div className='sbutton-container'>
-                    <button className="sbutton" onClick={handleClose}>Add!</button>
-                    <button className="sbutton" onClick={handleCancel}> Cancel </button>
+                    <button className="sbutton" onClick={handleClose}>ADD!</button>
+                    <button className="sbutton" onClick={handleCancel}> CANCEL </button>
                 </div>
             </div>
         </div>

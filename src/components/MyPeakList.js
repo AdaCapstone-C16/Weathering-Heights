@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import MyPeak from './MyPeak'
-
+import '../components/stylesheets/MyPeakList.css'
 const AccordionSection = styled.div`
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@ const MyPeakList = ({ peaks, updateList, handleUpdateTripError }) => {
         //         </Container>
         //     </AccordionSection>
         // </IconContext.Provider>
-        <section>
+        <section className='scroll'>
             {getPeakListJSX(peaks)}
         </section>
     )

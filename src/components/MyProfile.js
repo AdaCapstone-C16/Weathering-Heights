@@ -9,7 +9,7 @@ import MyPeakList from './MyPeakList';
 import BadgeDisplay from './BadgeDisplay';
 import '../components/stylesheets/Misc.css'
 import '../components/stylesheets/MyProfile.css'
-
+// import {toggle} from '../components/MyPeak'
 
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
@@ -81,6 +81,7 @@ export default function MyProfile({ data }) {
     
     const handleAddSummit = (summit) => {
         setError('')
+        // toggle(null)
         get(child(ref(db), `users/${currentUser.uid}/summits/${summit[0]}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
@@ -185,15 +186,15 @@ export default function MyProfile({ data }) {
                         {/* </section> */}
                         
                     {/* </div> */}
-                <p id='title'>WEATHERING HEIGHTS</p>
+                {/* <p id='title'>WEATHERING HEIGHTS</p>
                 
-                <h4>MY PROFILE</h4>
+                <h4>MY PROFILE</h4> */}
 
-                <div>
+                {/* <div>
                     <BadgeDisplay data={data}/>
-                </div>
+                </div> */}
 
-                <div className=''>
+                {/* <div className=''>
                     <section>
                         <button onClick={handleHomepage}>HOMEPAGE</button>
                         <button onClick={handleLogout}>LOGOUT</button>
@@ -201,7 +202,7 @@ export default function MyProfile({ data }) {
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </section>
                     
-                </div>
+                </div> */}
             </section>
             <section id='container-left'>
                 <section>

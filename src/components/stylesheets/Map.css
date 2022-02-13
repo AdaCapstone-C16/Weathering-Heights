@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
+.mpopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mpopup-inner {
+    border-radius: 12px;
+    justify-content: center;
+    width: 1%;
+    background-color: #FFFBFB;
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 1000px;
+    background-color: #FFF;
+    padding-left:10%
+}
+
+.mtitle {
+    color: black;
+    text-decoration: underline;
+    padding-left:15%
+}
+
+.mtitle-2 {
+    color: black;
+}
+
+.mtitle-3 {
+    color: black;
+    padding-left: 10%;
+}
+.mbutton {
+    margin: 5%;
+    display: inline-block;    
+    border-radius: 66px;
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+.mbutton:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}
+
+.map {
+    padding-left: 10%;
+}
+
+.button-loc {
+    padding-left: 10%;
+}

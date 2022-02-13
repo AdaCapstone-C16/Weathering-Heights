@@ -20,8 +20,8 @@ const DeleteTrip = ({trigger, setTrigger, deleteTrip, date}) => {
             <div className="dtpopup-inner">
                 <h2 className='dttitle'>DELETE TRIP?</h2>
                 <div className='dtbutton-container'>
-                    <button className='dtbutton' onClick={handleNo}>No</button>
-                    <button  className='dtbutton' onClick={handleYes}>Yes</button>
+                    <button className='dtbutton' onClick={handleNo}>NO</button>
+                    <button  className='dtbutton' onClick={handleYes}>YES</button>
                 </div>
             </div>
         </div>

@@ -8,6 +8,9 @@ import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import CalendarForm from './CalendarForm';
 import './stylesheets/Accordion.css';
+import Map from './Map'
+import './stylesheets/Map.css';
+
 // import peaksContext from '../contexts/peaksContext';
 
 //-----------------------------------------------{styled componenets css}------------------------------------------------------//
@@ -94,7 +97,7 @@ const Dropdown = styled.div`
     background: #504C54;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-self: center;
     align-items: left;
     border-bottom: 5px solid #CCA19A;
@@ -146,6 +149,14 @@ const Accordion = (props) => {
     const [selectedPeak, setSelectedPeak] = useState(null);
     const [selectedPeakWeather, setSelectedPeakWeather] = useState(null);
     const [sortby, setSortby] = useState('default');
+    const [selectedIndex, setSelectedIndex] = useState()
+    const [mapPopup, setMapPopup] = useState(false)
+    const [selectedLink, setSelectedLink] = useState(null)
+
+    const handleMapPopup = () => {
+        console.log("In map popup")
+        setMapPopup(true)
+    }
     // console.log("Inside accordion")
     // console.log(props);
 
@@ -159,6 +170,8 @@ const Accordion = (props) => {
         const myList = getSortedList(sortby);
         setSelectedPeak(myList[index].name)
         setSelectedPeakWeather([myList[index].temp, myList[index].windSpeed, myList[index].windDir, myList[index].chance_precip])
+        setSelectedIndex(index)
+        setSelectedLink(myList[index].link)
     }
 
 
@@ -270,11 +283,17 @@ const Accordion = (props) => {
                     </Wrap>
                     {clicked === index ? 
                         <Dropdown>
-                        <div> 🥇 {item.rank}</div> 
-                        <div> ❕ {item.indigenous_name}</div>
-                        <div> 🧗 {item.elevation}</div>
-                        <div> 🔗 {item.link}</div>
-                        <div> 📍 {item.coordinates}</div>
+                            <div>
+                                <div> 🥇 {item.rank}</div> 
+                                <div> ❕ {item.indigenous_name}</div>
+                                <div> 🧗 {item.elevation}</div>
+                                <div> 🔗 {item.link}</div>
+                                <div> 📍 {item.coordinates}</div>
+                            </div>
+                            <div className='mbutton-loc'>
+                                <button onClick={handleMapPopup} className='button summit-btn'>SEE MAP</button>
+                                <Map trigger={mapPopup} setTrigger={setMapPopup} index={selectedIndex} name={selectedPeak} link={selectedLink}/>
+                            </div>
                         </Dropdown>:
                         null}
                     </>

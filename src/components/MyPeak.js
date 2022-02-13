@@ -72,7 +72,7 @@ color: #000000;
     }
 `;
 
-const Peak = ({ pKey, id, name, trips, updateList, handleUpdateTripError }) => {
+const MyPeak = ({ pKey, id, name, trips, updateList, handleUpdateTripError }) => {
     const [addTripPopup, setAddTripPopup] = useState(false)
     const [deleteSummitPopup, setDeleteSummitPopup] = useState(false)
     const { currentUser } = useAuth()
@@ -190,7 +190,7 @@ const Peak = ({ pKey, id, name, trips, updateList, handleUpdateTripError }) => {
     );
 };
 
-Peak.propTypes = {
+MyPeak.propTypes = {
     pKey: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -199,4 +199,6 @@ Peak.propTypes = {
     handleUpdateTripError: PropTypes.func.isRequired
     };
 
-export default Peak;
+
+
+export default MyPeak;

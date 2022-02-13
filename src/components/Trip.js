@@ -24,9 +24,9 @@ const Trip = ({date, desc, deleteTrip, updateTrip}) => {
     <li className='trip-container'>
             <p className='big-font'>{date}:</p>
             <p className='small-font'>{desc}</p>
-        <button onClick={handleTripDelete} className='button'>Delete Trip</button>
+        <button onClick={handleTripDelete} className='button'>DELETE TRIP</button>
         <DeleteTrip trigger={tripDelete} setTrigger={setTripDelete} deleteTrip={deleteTrip} date={date}/>
-        <button onClick={handleTripUpdate} className='button'>Update Trip</button>
+        <button onClick={handleTripUpdate} className='button'>UPDATE TRIP</button>
         <UpdateTrip trigger={tripUpdate} setTrigger={setTripUpdate} updateTrip={updateTrip} date={date} desc={desc}/>
     </li>
     );

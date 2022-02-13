@@ -5,7 +5,7 @@ import { getDatabase } from "firebase/database"
 import KEYS from "./components/firebase_api_key"
 
 const app = firebase.initializeApp({
-    apiKey: KEYS['REACT_APP_API_KEY'],
+    apiKey: KEYS['FIREBASE_API_KEY'],
     authDomain: KEYS['REACT_APP_AUTH_DOMAIN'],
     projectId: KEYS['REACT_APP_PROJECT_ID'],
     storageBucket: KEYS['REACT_APP_STORAGE_BUCKET'],
