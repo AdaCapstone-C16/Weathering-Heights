@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import '../components/stylesheets/AddSummit.css'
+import '../components/stylesheets/UpdateTrip.css'
 import 'react-datepicker/dist/react-datepicker.css'
 import PropTypes from 'prop-types';
 
@@ -24,15 +24,17 @@ const UpdateTrip = ({trigger, setTrigger, updateTrip, date}) => {
     }
 
     return ( trigger) ? (
-        <div className="popup">
-            <div className="popup-inner">
-                <h2>Would you like to update this trip?</h2>
-                <form>
-                    <label>Update Trip {date}:</label>
-                    <textarea rows="5" cols="33" placeholder='Enter trip notes!' onChange={handleTripNotes}></textarea>
+        <div className="ut-container-outer">
+            <div className="ut-container">
+                <h2 className='ut-title'>UPDATE TRIP</h2>
+                <form className='ut-upper-container'>
+                    <label className='ut-title-2'>DATE: {date}</label>
+                    <textarea rows="5" cols="70" placeholder='UPDATE TRIP NOTES HERE...' onChange={handleTripNotes}></textarea>
                 </form>
-                <button  onClick={handleCancel}>Cancel</button>
-                <button  onClick={handleYes}>Submit</button>
+                <div className='ut-button-container'>
+                <button  className="ut-button" onClick={handleCancel}>CANCEL</button>
+                <button className="ut-button" onClick={handleYes}>SUBMIT</button>
+                </div>
             </div>
         </div>
     ): "";

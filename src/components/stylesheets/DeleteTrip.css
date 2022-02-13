@@ -1,4 +1,4 @@
-.dpopup {
+.dtpopup {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.dpopup-inner {
+.dtpopup-inner {
     border-radius: 12px;
     justify-content: center;
     width: 1%;
@@ -23,11 +23,18 @@
 }
 
 
-.dtitle {
-    margin-left: 25%;
+.dttitle {
+    margin-left: 30%;
 }
 
-.dbutton {
+.dttitle-2 {
+    padding-bottom: .25%;
+    /* padding-left: 11%; */
+    padding-top: 2%;
+    font-size: x-large;
+}
+
+.dtbutton {
     margin: 5%;
     display: inline-block;    
     border-radius: 66px;
@@ -43,7 +50,7 @@
     font-size: 16px;
 }
 
-.dbutton:hover {
+.dtbutton:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -58,8 +65,9 @@
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
 }
 
-.dbutton-container {
+.dtbutton-container {
     display: flex;
     flex-direction: row;
     margin-left: 16%;
+    /* justify-content: space-between; */
 }

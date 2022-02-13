@@ -72,7 +72,7 @@ color: #000000;
     }
 `;
 
-const Peak = ({ pKey, id, name, trips, updateList }) => {
+const Peak = ({ pKey, id, name, trips, updateList, handleUpdateTripError }) => {
     const [addTripPopup, setAddTripPopup] = useState(false)
     const [deleteSummitPopup, setDeleteSummitPopup] = useState(false)
     const { currentUser } = useAuth()
@@ -120,8 +120,13 @@ const Peak = ({ pKey, id, name, trips, updateList }) => {
 
     const updateTrip = (date, desc) => {
         setClicked(null)
-        set(ref(db, `users/${currentUser.uid}/summits/${id}/trips/${date}`), desc)
-        updateList()
+        if (desc==null) {
+            handleUpdateTripError()
+        } else {
+            set(ref(db, `users/${currentUser.uid}/summits/${id}/trips/${date}`), desc)
+            updateList()
+        }
+        
     }
 
     const getTripListJSX = ( trips ) => {
@@ -190,7 +195,8 @@ Peak.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     trips: PropTypes.array,
-    updateList: PropTypes.func.isRequired
+    updateList: PropTypes.func.isRequired,
+    handleUpdateTripError: PropTypes.func.isRequired
     };
 
 export default Peak;

@@ -19,7 +19,7 @@ const DeleteSummit = ({trigger, setTrigger, deleteSummit}) => {
         <div className="dpopup">
             <div className="dpopup-inner">
                 <h2 className='dtitle'>DELETE SUMMIT?</h2>
-                <div className='sbutton-container'>
+                <div className='dbutton-container'>
                     <button  className='dbutton' onClick={handleYes}>Yes</button>
                     <button  className='dbutton' onClick={handleCancel}>Cancel</button>
                 </div>

@@ -52,8 +52,8 @@ const AddTrip = ({trigger, setTrigger, addTrip}) => {
                     <textarea rows="5" cols="75" placeholder='ENTER TRIP NOTES HERE... ' onChange={handleTripNotes}></textarea>
                 </form>
                 <section className='button-container'>
-                    <button className="close-button button" onClick={handleClose}>Add!</button>
-                    <button  className="button"onClick={handleCancel}>Cancel</button>
+                    <button className="button" onClick={handleClose}>Add!</button>
+                    <button  className="button" onClick={handleCancel}>Cancel</button>
                 </section>
             </div>
         </div>

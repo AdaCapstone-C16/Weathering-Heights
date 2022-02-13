@@ -83,8 +83,7 @@ export default function MyProfile({ data }) {
         setError('')
         get(child(ref(db), `users/${currentUser.uid}/summits/${summit[0]}`)).then((snapshot) => {
             if (snapshot.exists()) {
-                console.log('This summit is already in your summits')
-                setError('This summit already exists in your profile')
+                setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
             } else {
                 // Get selected peaks profile data from state to publish to db
                 let peakName = summit[1];
@@ -109,6 +108,9 @@ export default function MyProfile({ data }) {
         setError('')
     }
 
+    const handleUpdateTripError = () => {
+        setError('YOU MUST ENTER A VALID NEW TRIP REPORT')
+    }
     const getMyPeakData = () => {
         let myPeaksArr = []
         const dbRef = ref(db);
@@ -209,8 +211,8 @@ export default function MyProfile({ data }) {
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </div>
                     <div>
-                        {error && <Alert variant="danger">{error}<button onClick={handleExitError}>OK</button></Alert>}
-                        <MyPeakList peaks={myPeakList} updateList={getMyPeakData}></MyPeakList>
+                        {error && <Alert variant="danger">{error}<button onClick={handleExitError} className='error-button'>OK</button></Alert>}
+                        <MyPeakList peaks={myPeakList} updateList={getMyPeakData} handleUpdateTripError={handleUpdateTripError}></MyPeakList>
                     </div>
                 </section>
             </section>

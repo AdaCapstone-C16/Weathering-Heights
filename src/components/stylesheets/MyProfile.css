@@ -22,6 +22,7 @@ body{
     background-color: #504C54;
     width: 60%;
     background-image: url("../stylesheets/test.jpg");
+    background-size: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -56,3 +57,33 @@ li {
     color: #FFFFFF;
 }
 
+.error-button {
+    margin-left: 16%;
+    display: inline-block;    
+    border-radius: 66px;
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+.error-button:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}
