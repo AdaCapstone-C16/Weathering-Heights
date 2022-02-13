@@ -17,10 +17,11 @@ import MyProfile from './MyProfile';
 // import Thanks from './Thanks'
 import Map from './Map'
 import UpdateWeatherButton from './UpdateWeatherButton.js';
-import FIREBASE_API_KEY from './firebase_api_key.js';
+import { createBrowserHistory } from "history";
+// import FIREBASE_API_KEY from './firebase_api_key.js';
 
 function App() {
-  console.log(FIREBASE_API_KEY)
+  // console.log(FIREBASE_API_KEY)
   const [peakList, setPeakList] = useState([]);
   const [coordinates, setCoordinates] = useState([]);
 
@@ -77,6 +78,8 @@ function App() {
     setUpdateWeather(updateWeather + 1);
   }
 
+  const history = createBrowserHistory();
+
   return (
       // <Container className="d-flex align-items-center" style={{ minHeight: "100vh" }}>
       // <Container>
@@ -88,8 +91,8 @@ function App() {
       //     signalDBPull={signalDBPull} />
 
         <div>
-          <Router>
-            
+          {/* <Router basename="/Weathering-Heights"> */}
+          <Router basename='/Weathering-Heights' history={history}>
             <AuthProvider>
               <Navigation />
               <Routes>
@@ -98,7 +101,7 @@ function App() {
                 </Route>
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/login" element={<Login/>} />
-                <Route exxact path="/map" element={<Map/>}/>
+                <Route exact path="/map" element={<Map/>}/>
                 {/* <Route path="/thanks" element={<Thanks/>}/> */}
                 <Route path="/" element={<Homepage data={peakList}/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
