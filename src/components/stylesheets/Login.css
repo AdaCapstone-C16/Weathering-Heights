@@ -31,11 +31,9 @@
 }
 
 #login-card {
-    position: absolute;
-    width: 571px;
+    width: 50%;
     height: 500px;
-    left: 435px;
-    top: 236px;
+    left: 15%;
 
     background-color: #DEDFEC;
     border: 1px solid #c1c1c1;
@@ -77,4 +75,14 @@
 
 #login-button:hover {
     font-weight: normal;
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 1000px) {
+    #login-card {
+        width: 80%;
+        height: 500px;
+        left: 1%;
+    }
+
 }

@@ -1,9 +1,7 @@
 #signup-card {
-    position: absolute;
-    width: 571px;
+    width: 50%;
     height: 753px;
-    left: 435px;
-    top: 236px;
+    left: 15%;
 
     background-color: #DEDFEC;
     border: 1px solid #c1c1c1;
@@ -45,4 +43,13 @@
 
 #signup-button:hover {
     font-weight: normal;
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 1000px) {
+    #signup-card {
+        width: 80%;
+        left: 1%;
+    }
+
 }
