@@ -1,6 +1,6 @@
 #signup-card {
     width: 50%;
-    height: 653px;
+    height: 753px;
     left: 15%;
 
     background-color: #DEDFEC;
@@ -49,7 +49,6 @@
 @media only screen and (max-width: 1000px) {
     #signup-card {
         width: 80%;
-        height: 650px;
         left: 1%;
     }
 

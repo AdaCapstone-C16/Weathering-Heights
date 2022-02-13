@@ -23,7 +23,9 @@ const Navigation = () => {
     let homeOnlyNavView;
     const homeOnlyViews = ['/signup', '/forgot-password', '/login'];
     const location = useLocation();
-    if (homeOnlyViews.includes(location.pathname)) {
+    const path = location.pathname;
+    
+    if (homeOnlyViews.includes(path)) {
       homeOnlyNavView = true;
     } else {
       homeOnlyNavView = false;
@@ -42,7 +44,7 @@ const Navigation = () => {
 
     return (
         <Navbar id="navigation" className="justify-content-between">
-            {/* Left-aligned nav content */}
+            {/* Title: Left-aligned nav content */}
             <Nav id="navbar-title" className="justify-content-start">
               
                 <NavItem id="logo">
@@ -58,15 +60,17 @@ const Navigation = () => {
 
             </Nav>
 
-            {/* Right-aligned nav content */}
+            {/* Links: Right-aligned nav content */}
             <Nav id="navbar-links" className="justify-content-end">
 
+                {(path !== '/') &&
                 <NavItem className="item" eventkey={1} href="/">
                   <Nav.Link id="home-nav-link" as={Link} to="/" >Home</Nav.Link>
                 </NavItem>
+                }
                 
                 {/* MyProfile auth conditional */}
-                {currentUser && 
+                {(currentUser && path !== '/my-profile') && 
                   <NavItem className="item" eventkey={2} href="/my-profile">
                     <Nav.Link id="profile-nav-link" as={Link} to="/my-profile" >Profile</Nav.Link>
                   </NavItem>
