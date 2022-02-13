@@ -20,33 +20,29 @@
 }
 
 #navbar-links {
-}
-
-.nav-item {
+    padding-right: 2%;
 }
 
 .title-bar {
+    margin-top: 1%;
     display: flex;
     align-items: center;
 }
 
 #page-title {
     font-weight: bold;
-    font-size: 2em;
+    font-size: 3em;
+    line-height: .75em;
 }
 
 #subtitle {
     font-size: .5em;
 }
 
-#push {
-    margin-left: auto;
-}
-
 .item {
     display: flex;
-
     margin: 10px;
+    font-size: 1.5em;
 }
 
 .item:hover {
@@ -70,7 +66,7 @@
 }
 
 /* Mobile */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
     
     #navigation {
         display: flex;
