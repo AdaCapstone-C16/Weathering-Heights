@@ -2,7 +2,7 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 import '../components/stylesheets/Navigation.css';
-import logo from '../badges/wh-logo.png.png';
+import logo from '../badges/wh-logo.png';
 
 // React Styling
 const img_size = {
