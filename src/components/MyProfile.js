@@ -157,44 +157,32 @@ export default function MyProfile({ data }) {
     // const handleHomepage =() => {
     //     navigate("/")
     //     }
-    async function handleLogout() {
-        setError('')
-        try {
-            await logout()
-            navigate("/")
-        } catch {
-            setError('Failed to log out')
-        }
-    }
+    // async function handleLogout() {
+    //     setError('')
+    //     try {
+    //         await logout()
+    //         navigate("/")
+    //     } catch {
+    //         setError('Failed to log out')
+    //     }
+    // }
     
-    const handleHomepage =() => {
-        navigate("/")
-    }
+    // const handleHomepage =() => {
+    //     navigate("/")
+    // }
 
     return (
         <main id='main'>
             <section id='container-right'>
-                    {/* <p id='title'>WEATHERING HEIGHTS</p> */}
-                    {/* <div className=''> */}
-                        {/* <section> */}
-                        {/* <button onClick={handleMap}>MAP</button>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button> */}
-                        {/* </section> */}
-                        
-                    {/* </div> */}
-                <p id='title'>WEATHERING HEIGHTS</p>
-                
-                <h4>MY PROFILE</h4>
 
-                <div>
+                {/* <div>
                     <BadgeDisplay data={data}/>
-                </div>
+                </div> */}
 
                 <div className=''>
                     <section>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button>
+                        {/* <button onClick={handleHomepage}>HOMEPAGE</button> */}
+                        {/* <button onClick={handleLogout}>LOGOUT</button> */}
                         <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </section>

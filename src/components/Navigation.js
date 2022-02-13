@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 import '../components/stylesheets/Navigation.css';
 import logo from '../badges/wh-logo.png';
@@ -14,8 +15,11 @@ const img_size = {
 };
 
 const Navigation = () => {
-    const { currentUser } = useAuth()
+    const { currentUser, logout } = useAuth()
+    const [error, setError] = useState("")
+    const navigate = useNavigate()
     
+    // Determines current page, if Nav is "Home" only
     let homeOnlyNavView;
     const homeOnlyViews = ['/signup', '/forgot-password', '/login'];
     const location = useLocation();
@@ -24,6 +28,17 @@ const Navigation = () => {
     } else {
       homeOnlyNavView = false;
     }
+
+    // Logout functionality
+    async function handleLogout() {
+      setError('')
+      try {
+          await logout()
+          navigate("/")
+      } catch {
+          setError('Failed to log out')
+      }
+  }
 
     return (
         <Navbar id="navigation" className="justify-content-between">
@@ -60,7 +75,12 @@ const Navigation = () => {
                 {/* Login vs Logout */}
                 {(currentUser && !homeOnlyNavView) &&
                   <NavItem className="item" eventkey={4} href="/">
-                    <Nav.Link id="login-nav-link" as={Link} to="/">Logout</Nav.Link>
+                    <Nav.Link 
+                      id="login-nav-link" 
+                      as={Link} to="/" 
+                      onClick={handleLogout}>
+                        Logout
+                    </Nav.Link>
                   </NavItem>
                 }
 
