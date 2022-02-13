@@ -7,8 +7,8 @@ import {db} from '../firebase'
 import AddSummit from './AddSummit';
 import MyPeakList from './MyPeakList';
 import BadgeDisplay from './BadgeDisplay';
-import '../components/stylesheets/MyProfile.css'
 import '../components/stylesheets/Misc.css'
+import '../components/stylesheets/MyProfile.css'
 
 
 export default function MyProfile({ data }) {

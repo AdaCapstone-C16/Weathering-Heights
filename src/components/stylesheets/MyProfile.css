@@ -42,12 +42,6 @@ li {
     margin: 10px 0;
 }
 
-.trips {
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-}
-
 .my-summit-title-container {
     display: flex;
     flex-direction: row;
@@ -61,3 +55,4 @@ li {
     padding-top: 5%;
     color: #FFFFFF;
 }
+

@@ -1,5 +1,4 @@
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100');
 .accordion-top {
     display:flex;
     flex-direction: row;
@@ -25,8 +24,36 @@
     width:105%;
     margin-left: 20%;
 }
-
-.tcontainer {
+.trip-btn-container {
     display: flex;
-    padding-left: 25%;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 7%;
     }
+/* .trip-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25%;
+    } */
+
+.accordion-bottom {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #DEDFEC;
+    border-radius: 12px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: -5%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    padding:2%;
+}
+
+.trip-reports-title {
+text-align: center;
+text-decoration: underline;
+font-size: 20px;
+
+
+}

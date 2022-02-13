@@ -113,11 +113,13 @@ const Peak = ({ pKey, id, name, trips, updateList }) => {
     }
 
     const deleteTrip = (date) => {
+        setClicked(null)
         set(ref(db, `users/${currentUser.uid}/summits/${id}/trips/${date}`), null)
         updateList()
     }
 
     const updateTrip = (date, desc) => {
+        setClicked(null)
         set(ref(db, `users/${currentUser.uid}/summits/${id}/trips/${date}`), desc)
         updateList()
     }
@@ -145,21 +147,38 @@ const Peak = ({ pKey, id, name, trips, updateList }) => {
                     <span> {clicked === id? <FiMinus style={{color:'#CCA19A'}}/> : <FiPlus style={{color:'#CCA19A'}}/>}</span>
                 </section>
                 {clicked === id ? 
-                    <Dropdown>
-                        <section className='tcontainer'> 
-                            <div>
-                                <button onClick={handleAddTripPopup} className='button summit-btn'>ADD TRIP</button>
-                                <AddTrip trigger={addTripPopup} setTrigger={setAddTripPopup} addTrip={addTrip}/>
-                            </div>
-                            <div>
-                                <button onClick={handleDeleteSummitPopup} className='button summit-btn'>DELETE SUMMIT</button>
-                                <DeleteSummit trigger={deleteSummitPopup} setTrigger={setDeleteSummitPopup} deleteSummit={deleteSummit}/>
-                            </div>
-                        </section>
-                        <section className='trips'>
-                            <ol>{getTripListJSX(trips)}</ol>
-                        </section>
-                    </Dropdown>:
+                    // <Dropdown>
+                    //     <section className='tcontainer'> 
+                    //         <div>
+                    //             <button onClick={handleAddTripPopup} className='button summit-btn'>ADD TRIP</button>
+                    //             <AddTrip trigger={addTripPopup} setTrigger={setAddTripPopup} addTrip={addTrip}/>
+                    //         </div>
+                    //         <div>
+                    //             <button onClick={handleDeleteSummitPopup} className='button summit-btn'>DELETE SUMMIT</button>
+                    //             <DeleteSummit trigger={deleteSummitPopup} setTrigger={setDeleteSummitPopup} deleteSummit={deleteSummit}/>
+                    //         </div>
+                    //     </section>
+                    //     <section className='trips'>
+                    //         <ol>{getTripListJSX(trips)}</ol>
+                    //     </section>
+                    // </Dropdown>:
+                    <section className='accordion-bottom'>
+                    <section className='trip-container'>
+                        <p className='trip-reports-title'>TRIP REPORTS</p>
+                        <ol>{getTripListJSX(trips)}</ol>
+                    </section>
+                    <section className='trip-btn-container'> 
+                        <div>
+                            <button onClick={handleAddTripPopup} className='button summit-btn'>ADD TRIP</button>
+                            <AddTrip trigger={addTripPopup} setTrigger={setAddTripPopup} addTrip={addTrip}/>
+                        </div>
+                        <div>
+                            <button onClick={handleDeleteSummitPopup} className='button summit-btn'>DELETE SUMMIT</button>
+                            <DeleteSummit trigger={deleteSummitPopup} setTrigger={setDeleteSummitPopup} deleteSummit={deleteSummit}/>
+                        </div>
+                    
+                    </section>
+                </section>:
                     null}
             </>
 
