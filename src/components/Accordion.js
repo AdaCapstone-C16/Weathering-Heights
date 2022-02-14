@@ -6,6 +6,9 @@ import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import CalendarForm from './CalendarForm';
 import './stylesheets/Accordion.css';
+import Map from './Map'
+import './stylesheets/Map.css';
+
 // import peaksContext from '../contexts/peaksContext';
 
 //-----------------------------------------------{styled componenets css}------------------------------------------------------//
@@ -92,7 +95,7 @@ const Dropdown = styled.div`
     background: #504C54;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-self: center;
     align-items: left;
     border-bottom: 5px solid #CCA19A;
@@ -140,6 +143,25 @@ const Accordion = (props) => {
     const [selectedPeakWeather, setSelectedPeakWeather] = useState(null);
     const [sortby, setSortby] = useState('default');
 
+    const [selectedIndex, setSelectedIndex] = useState()
+    const [mapPopup, setMapPopup] = useState(false)
+    const [selectedLink, setSelectedLink] = useState(null)
+
+    const handleMapPopup = () => {
+        // console.log("WE IN MAP!")
+        // console.log(selectedPeak)
+        // console.log(selectedLink)
+        setMapPopup(true)
+        bulgerList.forEach(peak => {
+            if (peak.name===selectedPeak) {
+                setSelectedIndex(peak.key)
+            }
+        });
+    }
+    // console.log("Inside accordion")
+    // console.log(props);
+
+
     const toggle = (index) => {
         //if clicked question is already open, then close it 
         //raise this handler 
@@ -150,6 +172,7 @@ const Accordion = (props) => {
         const myList = getSortedList(sortby);
         setSelectedPeak(myList[index].name)
         setSelectedPeakWeather([myList[index].temp, myList[index].windSpeed, myList[index].windDir, myList[index].chance_precip])
+        setSelectedLink(myList[index].link)
     }
 
 
@@ -234,7 +257,8 @@ const Accordion = (props) => {
             </div>
             {console.log(sortby)}
             <div className='accordion-card'>
-            <div className='accordion-title'>100 Peaks of Washington</div>
+            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+            {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
                 return(
                     <>
@@ -249,11 +273,17 @@ const Accordion = (props) => {
                     </Wrap>
                     {clicked === index ? 
                         <Dropdown>
-                        <div> 🥇   Rank:   {item.rank}</div> 
-                        <div> ❕   Indigenous Name: --  {item.indigenous_name}</div>
-                        <div> 🧗   Elevation:   {item.elevation}</div>
-                        <div> 🔗   Peak Bagger's Link:   {item.link}</div>
-                        <div> 📍   Coordinates:   {item.coordinates}</div>
+                            <div>
+                                <div> 🥇   Rank:   {item.rank}</div> 
+                                <div> ❕   Indigenous Name: --  {item.indigenous_name}</div>
+                                <div> 🧗   Elevation:   {item.elevation} ft.</div>
+                                <div> 🔗   Peak Bagger's Link:   <a href={'https://www.peakbagger.com/'+item.link}>{item.name}</a></div>
+                                <div> 📍   Coordinates:   {item.coordinates[0]}, {item.coordinates[1]}</div>
+                            </div>
+                            <div className='seemap-btn-loc'>
+                                <button onClick={handleMapPopup} className='seemap-btn'>SEE MAP</button>
+                                <Map trigger={mapPopup} setTrigger={setMapPopup} index={selectedIndex} name={selectedPeak} link={selectedLink}/>
+                            </div>
                         </Dropdown>:
                         null}
                     </>

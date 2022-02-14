@@ -1,26 +1,26 @@
 import React from 'react';
-import '../components/stylesheets/PopUps.css'
+import '../components/stylesheets/DeleteSummit.css'
 import 'react-datepicker/dist/react-datepicker.css'
 import PropTypes from 'prop-types';
 
 const DeleteSummit = ({trigger, setTrigger, deleteSummit}) => {
-
-    
     const handleYes = () => {
         deleteSummit()
         setTrigger(false) 
-    }
+        }
 
     const handleCancel = () => {
         setTrigger(false) 
-    }
+        }
 
     return ( trigger) ? (
-        <div className="popup">
-            <div className="popup-inner">
-                <h2>Are you sure you would like to delete this summit?</h2>
-                <button  onClick={handleYes}>Yes</button>
-                <button  onClick={handleCancel}>Cancel</button>
+        <div className="dpopup">
+            <div className="dpopup-inner">
+                <h2 className='dtitle'>DELETE SUMMIT?</h2>
+                <div className='dbutton-container'>
+                    <button  className='dbutton' onClick={handleYes}>Yes</button>
+                    <button  className='dbutton' onClick={handleCancel}>Cancel</button>
+                </div>
             </div>
         </div>
     ): "";

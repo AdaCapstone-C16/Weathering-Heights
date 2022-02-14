@@ -1,4 +1,4 @@
-.spopup {
+.dpopup {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.spopup-inner {
+.dpopup-inner {
     border-radius: 12px;
     justify-content: center;
     width: 1%;
@@ -23,18 +23,11 @@
 }
 
 
-.stitle {
-    margin-left: 30%;
-    text-decoration: underline;
+.dtitle {
+    margin-left: 25%;
 }
 
-.stitle-2 {
-    padding-bottom: .25%;
-    padding-top: 2%;
-    font-size: x-large;
-}
-
-.sbutton {
+.dbutton {
     margin: 5%;
     display: inline-block;    
     border-radius: 66px;
@@ -50,7 +43,7 @@
     font-size: 16px;
 }
 
-.sbutton:hover {
+.dbutton:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -65,8 +58,8 @@
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
 }
 
-.sbutton-container {
+.dbutton-container {
     display: flex;
     flex-direction: row;
-    margin-left: 15%;
+    margin-left: 16%;
 }

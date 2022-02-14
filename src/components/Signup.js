@@ -20,20 +20,17 @@ export default function Signup() {
     async function handleSubmit(event) {
         event.preventDefault()
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            console.log(error)
             return setError("Passwords do not match")
-        }
+            }
         try {
             setError('')
             setLoading(true)
             let name = (fNameRef.current.value + ' ' + lNameRef.current.value).toUpperCase()
             await signup(emailRef.current.value, passwordRef.current.value, name)
-            // console.log('This user is now signed up', currentUser.uid, currentUser.displayName)
             navigate("/my-profile")
         } catch (error){
             setError('Failed to create an account')
-            console.log(error)
-        } 
+            } 
         setLoading(false)
         
     }

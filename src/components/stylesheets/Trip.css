@@ -1,6 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
 .trip-container {
-    width: 200%;
-    margin-left: -55%;
-    background: #F7F7FF;
     border-radius: 12px;
+    padding-right: 5%;
 }
+
+
+.big-font {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 10000;
+    padding-left:5%;
+    padding-top:5%;
+    margin-bottom: 0%;
+    text-decoration: underline;
+}
+
+.small-font {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding-left:5%;
+    margin-bottom: 0%;
+}
+
+

@@ -144,7 +144,7 @@ import KEYS from './firebase_api_key';
         <input className='google-form-end' type='time' id='end-time' required ref={endTimeInputRef} />
         <label className='google-form-attendee' htmlFor='attendees'>Attendee:</label>
         <input className='google-form-attendee' type='attendees' id='attendees' required ref={attendeeInputRef} />  
-        <div className=''><button className='google-form-button' onClick={handleClick}>Add Event</button></div>
+        <div className=''><button className='google-form-button add-event' onClick={handleClick}>Add Event</button></div>
         </form>
     </div>
     );
