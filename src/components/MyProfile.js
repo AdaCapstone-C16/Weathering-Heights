@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import { Alert } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { Alert } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { ref, onValue, get, set, update, child } from 'firebase/database';
-import {db} from '../firebase'
+import { db } from '../firebase';
 import AddSummit from './AddSummit';
 import MyPeakList from './MyPeakList';
 import BadgeDisplay from './BadgeDisplay';
-import '../components/stylesheets/MyProfile.css'
-import '../components/stylesheets/Misc.css'
+import '../components/stylesheets/MyProfile.css';
+import '../components/stylesheets/Misc.css';
 
 
 export default function MyProfile({ data }) {
@@ -18,7 +18,9 @@ export default function MyProfile({ data }) {
 
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
+    const [badgedRanges, setBadgedRanges] = useState();
     const [badges, setBadges] = useState();
+    
 
     let peakNames = []
     for (let peak of data) {
@@ -30,13 +32,15 @@ export default function MyProfile({ data }) {
     };
 
     useEffect(() => {
-        // Retrieves users list of badge names
+        // Retrieves list of users badge names
         onValue(ref(db, `users/${currentUser.uid}/badges/`), (snapshot) => {
             const data = snapshot.val();
-            const badges = Object.keys(data);
-            console.log(badges)
+            const ranges = Object.keys(data);
+            const badges = Object.values(data);
+            // console.log(badges)
             
             setBadges(badges);
+            setBadgedRanges(ranges);
         });
     }, []);
 
@@ -49,7 +53,7 @@ export default function MyProfile({ data }) {
         const userRange = myPeakList.filter(peak => peak.range === rangeName);
         const userRangeLen = userRange.length;
 
-        if (badges === undefined) {
+        if (badgedRanges === undefined) {
             return;
         }
         // If badge already won, skip
@@ -61,11 +65,11 @@ export default function MyProfile({ data }) {
             // Find correct png 
             const formatRangeName = rangeName.toLowerCase();
             let badgeFileName = formatRangeName.replaceAll(' ', '_');
-            badgeFileName += '_range.png';
+            badgeFileName = 'badges/' + badgeFileName + '_range.png';
 
             // Adds new range badge to user profile
             update(ref(db, `users/${currentUser.uid}/badges/`), {[rangeName]: badgeFileName})
-            return `${rangeName}`
+            return badgeFileName;
         } else { // Otherwise we don't give a badge
             return;
         }
@@ -143,46 +147,16 @@ export default function MyProfile({ data }) {
         })
     }
 
-    // If the logout button is clicked, it will navigate user to the homepage
-    // async function handleLogout() {
-    //     setError('')
-    //     try {
-    //         await logout()
-    //         navigate("/")
-    //     } catch {
-    //         setError('Failed to log out')
-    //     }
-    //     }
-    
-    // const handleHomepage =() => {
-    //     navigate("/")
-    //     }
-    // async function handleLogout() {
-    //     setError('')
-    //     try {
-    //         await logout()
-    //         navigate("/")
-    //     } catch {
-    //         setError('Failed to log out')
-    //     }
-    // }
-    
-    // const handleHomepage =() => {
-    //     navigate("/")
-    // }
-
     return (
         <main id='main'>
             <section id='container-right'>
 
-                {/* <div>
-                    <BadgeDisplay data={data}/>
-                </div> */}
+                <div>
+                    {badges && <BadgeDisplay data={data} badges={badges}/>}
+                </div>
 
                 <div className=''>
                     <section>
-                        {/* <button onClick={handleHomepage}>HOMEPAGE</button> */}
-                        {/* <button onClick={handleLogout}>LOGOUT</button> */}
                         <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </section>

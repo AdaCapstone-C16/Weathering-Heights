@@ -3,7 +3,6 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 import '../components/stylesheets/Navigation.css';
-import logo from '../badges/wh-logo.png';
 
 // React Styling
 const img_size = {
@@ -48,7 +47,7 @@ const Navigation = () => {
             <Nav id="navbar-title" className="justify-content-start">
               
                 <NavItem id="logo">
-                  <img src={ logo } alt="Site logo" style={ img_size }></img>
+                  <img src="wh-logo.png" alt="logo: person climbing mountain" style={ img_size }></img>
                 </NavItem>
 
                 <NavItem className="title-bar">
