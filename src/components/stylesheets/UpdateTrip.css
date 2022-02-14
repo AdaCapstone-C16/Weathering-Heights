@@ -1,5 +1,3 @@
-
-
 .ut-button {
     margin: 5%;
     display: inline-block;    
@@ -55,7 +53,8 @@
 
 .ut-title {
 margin-left: 35%;
-text-decoration: underline;}
+text-decoration: underline;
+}
 
 
 .ut-title-2 {
@@ -75,12 +74,9 @@ text-decoration: underline;}
     display: flex;
     flex-direction: row;
     margin-left: 15%;
-    /* justify-content: space-between; */
 }
 
 .ut-upper-container {
     display: flex;
     flex-direction: column;
-    /* padding-left: 8%; */
-
 }

@@ -7,18 +7,16 @@ import PropTypes from 'prop-types';
 
 
 const AddTrip = ({trigger, setTrigger, addTrip}) => {
-
     const [selectedDate, setSelectedDate] = useState(null)
     const [tripNotes, setTripNotes] = useState(null)
 
-    
     const handleSelectedDate =(date) =>{
         setSelectedDate(date)
-    }
+        }
     
     const handleTripNotes = (input) => {
         setTripNotes(input.target.value)
-    }
+        }
     
     const parseDate = () => {
         let strDate = JSON.stringify(selectedDate)
@@ -27,17 +25,17 @@ const AddTrip = ({trigger, setTrigger, addTrip}) => {
         let mnth = strDate.slice(6,8)
         const dateFinal = [mnth, day, year].join("-")
         return dateFinal
-    }
+        }
     
     const handleClose = () => {
         const date = parseDate()
         addTrip(date,tripNotes)
         setTrigger(false) 
-    }
+        }
 
     const handleCancel = () => {
         setTrigger(false) 
-    }
+        }
 
     return ( trigger) ? (
         <div className="container-outer">

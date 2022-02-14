@@ -20,10 +20,10 @@ const img_size = {
     borderWidth: 1,
 };
 
+
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
-
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
     const [badgedRanges, setBadgedRanges] = useState([]);
@@ -37,7 +37,7 @@ export default function MyProfile({ data }) {
         } else if (peak) {
             peakNames.push({value:peak.key, label:peak.name})
         };
-    };
+        };
 
     useEffect(() => {
         // Retrieves list of user's badge names
@@ -112,7 +112,6 @@ export default function MyProfile({ data }) {
         } else {
             return;
         }
- 
         // Adds new range badge to user profile
         update(ref(db, `users/${currentUser.uid}/`), {achievement: badgeFileName})
     }
@@ -127,7 +126,6 @@ export default function MyProfile({ data }) {
     
     const handleAddSummit = (summit) => {
         setError('')
-        // toggle(null)
         get(child(ref(db), `users/${currentUser.uid}/summits/${summit[0]}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
@@ -146,11 +144,12 @@ export default function MyProfile({ data }) {
         
     const handleExitError = () => {
         setError('')
-    }
+        }
 
     const handleUpdateTripError = () => {
         setError('YOU MUST ENTER A VALID NEW TRIP REPORT')
-    }
+        }
+    
     const getMyPeakData = () => {
         let myPeaksArr = []
         const dbRef = ref(db);

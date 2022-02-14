@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Map({trigger, setTrigger, index, name, link}) {
-    // const [peak, setPeak] = useState(nul)
-    const handleClose = () => {
-        setTrigger(false)
-    }
     const mapURL = index+'_'+(name.replace(/ /g,''))+'.html'
     const peakLink = 'https://www.peakbagger.com/'+link
+    
+    const handleClose = () => {
+        setTrigger(false)
+        }
     
     return (trigger) ? ( 
         <div className='mpopup'>
@@ -21,7 +21,6 @@ export default function Map({trigger, setTrigger, index, name, link}) {
                 </div>
             </div>
         </div>
-    
     ): "";
     }
 
