@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Weathering-Heights/static/css/main.b0d20134.css",
+    "main.js": "/Weathering-Heights/static/js/main.664e972c.js",
+    "static/media/test.jpg": "/Weathering-Heights/static/media/test.05e23571efa56bce0ca5.jpg",
+    "index.html": "/Weathering-Heights/index.html",
+    "main.b0d20134.css.map": "/Weathering-Heights/static/css/main.b0d20134.css.map",
+    "main.664e972c.js.map": "/Weathering-Heights/static/js/main.664e972c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0d20134.css",
+    "static/js/main.664e972c.js"
+  ]
+}
