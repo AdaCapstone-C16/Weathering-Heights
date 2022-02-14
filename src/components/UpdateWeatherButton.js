@@ -1,12 +1,27 @@
-import { useState, useEffect, useRef } from 'react';
 import { ref, update } from "firebase/database";
 import { db } from './../firebase.js';
 import axios from "axios";
 import PropTypes from 'prop-types';
+import KEYS from "./firebase_api_key";
 
 const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
-    const getNextSaturday = () => {
+    const formatDate = (date) => {
+        // Formats date to => 2022-02-12
+        const d = new Date(date);
+        let month = `${d.getMonth() + 1}`;
+        let day = `${d.getDate()}`;
+        let year = `${d.getFullYear()}`;
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    const getNextSaturdayWeatherAPI = () => {
         // Calculates date for next coming Saturday, returns Sunday if today is Sunday
         const forecast = new Date();
         const day = forecast.getDay();
@@ -24,31 +39,28 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
             const newDate = date + tilSaturday;
             forecast.setDate(newDate);
             
-            // console.log(forecast);
-            return forecast;
+            const saturdayDate = formatDate(forecast)
+            return saturdayDate;
         }
     }
+    // getNextSaturdayWeatherAPI()
 
-    const formatDate = (date) => {
-        // Formats date to => 2022-02-12
-        const d = new Date(date);
-        let month = `${d.getMonth() + 1}`;
-        let day = `${d.getDate()}`;
-        let year = `${d.getFullYear()}`;
-
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
-
-        return [year, month, day].join('-');
+    const getNextSaturdayNWS = () => {
+        // {
+        //     "number": 6,
+        //     "name": "Wednesday Night",
+        //     "startTime": "2022-02-16T18:00:00-08:00",
+        //     "endTime": "2022-02-17T06:00:00-08:00",
     }
+
 
     // Pulls new data from weather API, posts to DB
     const updateWeather = () => {
-        const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+        const apiKey = KEYS['REACT_APP_WEATHER_API_KEY'];
         const WeatherAPIURL = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}`
         const NWSURL = 'https://api.weather.gov/points'
+
+        
 
         if (coordinates !== []) {
             // Make API call for each set of peak coordinates
@@ -60,50 +72,45 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                 lon = lon.toFixed(4);
                 
                 let key = peakList[i].key;
-
+                
                 // Date of forecast Saturday 
-                const date = formatDate(getNextSaturday());
+                const date = getNextSaturdayWeatherAPI();
+                console.log({date})
 
-                    // TODO: Why are all the weather pulls the same?
                     // Forecast Weather API calls
                     axios
-                    // .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
-                    // .then((res) => {
-                    //     console.log(res.data.forecast)
-                    //     const now = res.data.forecast.forecastday[0].hour[12];
-                    //     // Updates temperature data in DB
-                    //     update(ref(db, 'peaks/' + key), {
-                    //     // temp: now.temp_f,
-                    //     chance_precip: now.chance_of_rain,
-                    //     // wind_speed: now.wind_mph,
-                    //     // wind_direction: `${now.wind_dir}`,
-                    // });
-                    // })
-                    .get(`${NWSURL}/${lat},${lon}`)
+                    .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
                     .then((res) => {
-                        const forecast_link = res.data.properties.forecast
-                        console.log(forecast_link)
-                        // setStatus(false);
-                        return axios.get(`${forecast_link}`);
-                    })
-                    .then((res) => {
-                        // Today's forecast
-                        let today = res.data.properties.periods[0];
-                        let temp = today.temperature;
-                        let windDirection = `${today.windDirection}`;
-                        let windSpeed = today.windSpeed;
-                        
-                        // Format windSpeed
-                        windSpeed = windSpeed.slice(0, 2);
-                        windSpeed = windSpeed.replaceAll(' ', '');
-                        
+                        const now = res.data.forecast.forecastday[0].hour[12];
                         // Updates temperature data in DB
                         update(ref(db, 'peaks/' + key), {
-                            temp: temp,
-                            wind_speed: parseInt(windSpeed),
-                            wind_direction: windDirection,
-                        });
+                        chance_precip: now.chance_of_rain,
+                    });
                     })
+                    // .get(`${NWSURL}/${lat},${lon}`)
+                    // .then((res) => {
+                    //     const forecast_link = res.data.properties.forecast
+                    //     return axios.get(`${forecast_link}`);
+                    // })
+                    // .then((res) => {
+                    //     // Today's forecast
+                    //     console.log(res)
+                    //     let today = res.data.properties.periods[0];
+                    //     let temp = today.temperature;
+                    //     let windDirection = `${today.windDirection}`;
+                    //     let windSpeed = today.windSpeed;
+                        
+                    //     // Format windSpeed
+                    //     windSpeed = windSpeed.slice(0, 2);
+                    //     windSpeed = windSpeed.replaceAll(' ', '');
+                        
+                    //     // Updates temperature data in DB
+                    //     update(ref(db, 'peaks/' + key), {
+                    //         temp: temp,
+                    //         wind_speed: parseInt(windSpeed),
+                    //         wind_direction: windDirection,
+                    //     });
+                    // })
                     .catch((err) => {
                         console.log(err.data);
                     });
