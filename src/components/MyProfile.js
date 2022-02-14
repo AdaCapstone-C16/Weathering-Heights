@@ -9,13 +9,11 @@ import MyPeakList from './MyPeakList';
 import BadgeDisplay from './BadgeDisplay';
 import '../components/stylesheets/Misc.css'
 import '../components/stylesheets/MyProfile.css'
-// import {toggle} from '../components/MyPeak'
 
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
     const navigate = useNavigate()
     const { currentUser, logout } = useAuth()
-
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
     const [badges, setBadges] = useState();
@@ -27,7 +25,7 @@ export default function MyProfile({ data }) {
         } else if (peak) {
             peakNames.push({value:peak.key, label:peak.name})
         };
-    };
+        };
 
     useEffect(() => {
         // Retrieves users list of badge names
@@ -81,7 +79,6 @@ export default function MyProfile({ data }) {
     
     const handleAddSummit = (summit) => {
         setError('')
-        // toggle(null)
         get(child(ref(db), `users/${currentUser.uid}/summits/${summit[0]}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
@@ -107,11 +104,12 @@ export default function MyProfile({ data }) {
         
     const handleExitError = () => {
         setError('')
-    }
+        }
 
     const handleUpdateTripError = () => {
         setError('YOU MUST ENTER A VALID NEW TRIP REPORT')
-    }
+        }
+    
     const getMyPeakData = () => {
         let myPeaksArr = []
         const dbRef = ref(db);
@@ -141,69 +139,13 @@ export default function MyProfile({ data }) {
                                 trips:pTrips
                             })
                 });
-                // console.log(myPeaksArr)
             setMyPeakList(myPeaksArr)
         })
     }
 
-    // If the logout button is clicked, it will navigate user to the homepage
-    // async function handleLogout() {
-    //     setError('')
-    //     try {
-    //         await logout()
-    //         navigate("/")
-    //     } catch {
-    //         setError('Failed to log out')
-    //     }
-    //     }
-    
-    // const handleHomepage =() => {
-    //     navigate("/")
-    //     }
-    async function handleLogout() {
-        setError('')
-        try {
-            await logout()
-            navigate("/")
-        } catch {
-            setError('Failed to log out')
-        }
-    }
-    
-    const handleHomepage =() => {
-        navigate("/")
-    }
-
     return (
         <main id='main'>
-            <section id='container-right'>
-                    {/* <p id='title'>WEATHERING HEIGHTS</p> */}
-                    {/* <div className=''> */}
-                        {/* <section> */}
-                        {/* <button onClick={handleMap}>MAP</button>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button> */}
-                        {/* </section> */}
-                        
-                    {/* </div> */}
-                {/* <p id='title'>WEATHERING HEIGHTS</p>
-                
-                <h4>MY PROFILE</h4> */}
-
-                {/* <div>
-                    <BadgeDisplay data={data}/>
-                </div> */}
-
-                {/* <div className=''>
-                    <section>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button>
-                        <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
-                        <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
-                    </section>
-                    
-                </div> */}
-            </section>
+            <section id='container-right'></section>
             <section id='container-left'>
                 <section>
                     <div className='my-summit-title-container'> 

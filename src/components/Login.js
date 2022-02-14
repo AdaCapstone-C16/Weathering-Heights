@@ -22,12 +22,10 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value)
             navigate("/my-profile")
         } catch (error) {
-            console.log(error)
             setError('Failed to access account')
         }
         setLoading(false)
-        
-    }
+        }
     
 return (
     <section>
@@ -44,16 +42,13 @@ return (
                         <Form.Label className="popup-label">Password</Form.Label>
                         <Form.Control className="form-field" type="password" ref={passwordRef} required></Form.Control>
                     </Form.Group>
-                    
                     <Button 
                         disabled={loading} 
                         id="login-button"
                         className="popup-label w-100 text-center mt-2"
                         type="submit">Login
                     </Button>
-
                 </Form>
-                
                 <div className="w-100 text-center mt-3">
                     <Link className="popup-link" to='/forgot-password'>Forgot Password?</Link>
                 </div>
@@ -62,7 +57,6 @@ return (
                 </div>
             </Card.Body>
         </Card>
-        
     </section>
     
     )

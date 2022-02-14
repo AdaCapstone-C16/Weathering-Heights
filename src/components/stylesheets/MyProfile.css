@@ -1,13 +1,5 @@
-/* @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
-if you want the font to be thicker, add ",200" 
-or any other measure behind the ":100" in the url above */
-
-/* example for styling with this font:
-body{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-} */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
 #main {
     min-height: 100vh;
     min-width: 100vh;
@@ -26,13 +18,11 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
 }
 
 #container-left {
     background-color: #504C54;
     width: 40%
-
 }
 
 

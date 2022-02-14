@@ -10,18 +10,16 @@ const UpdateTrip = ({trigger, setTrigger, updateTrip, date}) => {
 
     const handleTripNotes = (input) => {
         setTripNotes(input.target.value)
-    }
+        }
+    
     const handleYes = () => {
-        console.log("you chose yes")
         updateTrip(date, tripNotes)
         setTrigger(false) 
-    }
+        }
 
     const handleCancel = () => {
-        console.log("you chose cancel")
-
         setTrigger(false) 
-    }
+        }
 
     return ( trigger) ? (
         <div className="ut-container-outer">
@@ -32,13 +30,14 @@ const UpdateTrip = ({trigger, setTrigger, updateTrip, date}) => {
                     <textarea rows="5" cols="70" placeholder='UPDATE TRIP NOTES HERE...' onChange={handleTripNotes}></textarea>
                 </form>
                 <div className='ut-button-container'>
-                <button  className="ut-button" onClick={handleCancel}>CANCEL</button>
-                <button className="ut-button" onClick={handleYes}>SUBMIT</button>
+                    <button  className="ut-button" onClick={handleCancel}>CANCEL</button>
+                    <button className="ut-button" onClick={handleYes}>SUBMIT</button>
                 </div>
             </div>
         </div>
     ): "";
 }
+
 UpdateTrip.propTypes = {
     trigger: PropTypes.bool.isRequired,
     setTrigger: PropTypes.func.isRequired,

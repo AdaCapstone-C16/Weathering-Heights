@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 
 
 const DeleteTrip = ({trigger, setTrigger, deleteTrip, date}) => {
-
     const handleYes = () => {
         deleteTrip(date)
         setTrigger(false) 
-    }
+        }
 
     const handleNo = () => {
         setTrigger(false) 
-    }
+        }
 
     return ( trigger) ? (
         <div className="dtpopup">
@@ -27,10 +26,12 @@ const DeleteTrip = ({trigger, setTrigger, deleteTrip, date}) => {
         </div>
     ): "";
 }
+
 DeleteTrip.propTypes = {
     trigger: PropTypes.bool.isRequired,
     setTrigger: PropTypes.func.isRequired,
     deleteTrip: PropTypes.func.isRequired, 
     date: PropTypes.string.isRequired,
     };
+
 export default DeleteTrip

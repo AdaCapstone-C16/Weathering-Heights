@@ -4,16 +4,14 @@ import 'react-datepicker/dist/react-datepicker.css'
 import PropTypes from 'prop-types';
 
 const DeleteSummit = ({trigger, setTrigger, deleteSummit}) => {
-
-    
     const handleYes = () => {
         deleteSummit()
         setTrigger(false) 
-    }
+        }
 
     const handleCancel = () => {
         setTrigger(false) 
-    }
+        }
 
     return ( trigger) ? (
         <div className="dpopup">

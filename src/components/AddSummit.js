@@ -17,8 +17,8 @@ const AddSummit = ({trigger, setTrigger, data, handleAddSummit}) => {
         }
 
     const handleCancel = () => {
-            setTrigger(false) 
-            }
+        setTrigger(false) 
+        }
 
     return ( trigger) ? (
         <div className="spopup">
