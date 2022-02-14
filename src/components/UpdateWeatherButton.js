@@ -46,9 +46,9 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
 
     // Pulls new data from weather API, posts to DB
     const updateWeather = () => {
-        console.log("inside updateWEather")
         const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const baseURL = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}`
+        const WeatherAPIURL = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}`
+        const NWSURL = 'https://api.weather.gov/points'
 
         if (coordinates !== []) {
             // Make API call for each set of peak coordinates
@@ -67,21 +67,46 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                     // TODO: Why are all the weather pulls the same?
                     // Forecast Weather API calls
                     axios
-                    .get(`${baseURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                    // .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                    // .then((res) => {
+                    //     console.log(res.data.forecast)
+                    //     const now = res.data.forecast.forecastday[0].hour[12];
+                    //     // Updates temperature data in DB
+                    //     update(ref(db, 'peaks/' + key), {
+                    //     // temp: now.temp_f,
+                    //     chance_precip: now.chance_of_rain,
+                    //     // wind_speed: now.wind_mph,
+                    //     // wind_direction: `${now.wind_dir}`,
+                    // });
+                    // })
+                    .get(`${NWSURL}/${lat},${lon}`)
                     .then((res) => {
-                        console.log(res.data.forecast)
-                        const now = res.data.forecast.forecastday[0].hour[12];
+                        const forecast_link = res.data.properties.forecast
+                        console.log(forecast_link)
+                        // setStatus(false);
+                        return axios.get(`${forecast_link}`);
+                    })
+                    .then((res) => {
+                        // Today's forecast
+                        let today = res.data.properties.periods[0];
+                        let temp = today.temperature;
+                        let windDirection = `${today.windDirection}`;
+                        let windSpeed = today.windSpeed;
+                        
+                        // Format windSpeed
+                        windSpeed = windSpeed.slice(0, 2);
+                        windSpeed = windSpeed.replaceAll(' ', '');
+                        
                         // Updates temperature data in DB
                         update(ref(db, 'peaks/' + key), {
-                        temp: now.temp_f,
-                        chance_precip: now.chance_of_rain,
-                        wind_speed: now.wind_mph,
-                        wind_direction: `${now.wind_dir}`,
+                            temp: temp,
+                            wind_speed: parseInt(windSpeed),
+                            wind_direction: windDirection,
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err.data);
                     });
-                })
-                .catch((err) => {
-                    console.log(err.data);
-                });
             }
             // Initiate new pull from DB to update state 
             signalDBPull();

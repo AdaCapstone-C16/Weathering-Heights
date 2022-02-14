@@ -84,11 +84,11 @@ function App() {
       // <Container className="d-flex align-items-center" style={{ minHeight: "100vh" }}>
       // <Container>
 
-      // <main>
-      //   <UpdateWeatherButton 
-      //     peakList={peakList}  
-      //     coordinates={coordinates}
-      //     signalDBPull={signalDBPull} />
+      <main>
+        <UpdateWeatherButton 
+          peakList={peakList}  
+          coordinates={coordinates}
+          signalDBPull={signalDBPull} />
 
         <div>
           {/* <Router basename="/Weathering-Heights"> */}
@@ -110,7 +110,7 @@ function App() {
           </Router>
         </div>
         
-      // </main>
+      </main>
       // </Container>
     
   )
