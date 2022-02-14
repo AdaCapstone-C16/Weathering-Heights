@@ -1,8 +1,6 @@
 //for all purposes, this is basically the peakList 
 //-----------------------------------------------{imports}------------------------------------------------------//
-import React, { useState, useContext } from 'react';
-import { Data } from "./Data";
-import { threePeaks } from "./Data";
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -135,19 +133,12 @@ const Accordion = (props) => {
 
     //const a = useContext(peaksContext)
 
-    //Dummy data for the dynamic parameters
-    let temp = 101;
-    let precip = 0;
-    let wind = 101;
-
     const bulgerList = props.data;
     //lift this state
     const [clicked, setClicked] = useState(false);
     const [selectedPeak, setSelectedPeak] = useState(null);
     const [selectedPeakWeather, setSelectedPeakWeather] = useState(null);
     const [sortby, setSortby] = useState('default');
-    // console.log("Inside accordion")
-    // console.log(props);
 
     const toggle = (index) => {
         //if clicked question is already open, then close it 
@@ -203,15 +194,6 @@ const Accordion = (props) => {
     function comparePrecipDESC( a, b ) {
         return (b.chance_precip - a.chance_precip);
     }
-        
-        //objs.sort( compare );
-
-
-
-    //create a function to actually get the render, take in the sort category as an argument
-    //This function should take in a parameter and then call a helper function and send it the sort criteria 
-    //input: category 
-    //output: sorted result 
     
     const getSortedList = (category) => {
 
@@ -236,9 +218,6 @@ const Accordion = (props) => {
             peaksSorted.sort( comparePrecipDESC );
         }
         return peaksSorted;
-
-        // const resultJSX = testJSX(peaksSorted);
-        // return resultJSX;
     }
 
     //-----------------------------------------------{JSX}------------------------------------------------------//
