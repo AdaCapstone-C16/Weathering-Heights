@@ -1,24 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import { Alert } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useAuth } from '../contexts/AuthContext';
+import { Alert } from 'react-bootstrap';
+import { db } from '../firebase';
 import { ref, onValue, get, set, update, child } from 'firebase/database';
-import {db} from '../firebase'
 import AddSummit from './AddSummit';
-import MyPeakList from './MyPeakList';
 import BadgeDisplay from './BadgeDisplay';
-import '../components/stylesheets/Misc.css'
-import '../components/stylesheets/MyProfile.css'
-// import {toggle} from '../components/MyPeak'
+import MyPeakList from './MyPeakList';
+import './stylesheets/MyProfile.css';
+import './stylesheets/Misc.css';
+import './stylesheets/BadgeDisplay.css';
+
+// React Styling
+const img_size = {
+    width: 350,
+    height: 350,
+    resizeMode: "contain",
+    alignSelf: "center",
+    borderWidth: 1,
+};
 
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
-    const navigate = useNavigate()
     const { currentUser, logout } = useAuth()
 
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
+    const [badgedRanges, setBadgedRanges] = useState([]);
     const [badges, setBadges] = useState();
+    const [achievement, setAchievement] = useState();
 
     let peakNames = []
     for (let peak of data) {
@@ -30,16 +40,29 @@ export default function MyProfile({ data }) {
     };
 
     useEffect(() => {
-        // Retrieves users list of badge names
+        // Retrieves list of user's badge names
         onValue(ref(db, `users/${currentUser.uid}/badges/`), (snapshot) => {
             const data = snapshot.val();
-            const badges = Object.keys(data);
-            console.log(badges)
-            
+
+            if (data === null) {
+                return
+            }
+
+            const ranges = Object.keys(data);
+            const badges = Object.values(data);
+
             setBadges(badges);
+            setBadgedRanges(ranges);
+        })
+
+        // Retrieves achievement status from db
+        onValue(ref(db, `users/${currentUser.uid}/achievement/`), (snapshot) => {
+            const data = snapshot.val();
+            setAchievement(data);
         });
     }, []);
 
+    // Determines badge award and adds badge to db
     const determineRangeComplete = (rangeName) => {
         // Filter for mandatory peak objects to complete particular range
         const range = data.filter(peak => peak.range === rangeName);
@@ -49,11 +72,11 @@ export default function MyProfile({ data }) {
         const userRange = myPeakList.filter(peak => peak.range === rangeName);
         const userRangeLen = userRange.length;
 
-        if (badges === undefined) {
+        if (badgedRanges === undefined) {
             return;
         }
         // If badge already won, skip
-        else if (badges[0].includes(rangeLen)) {
+        else if (badgedRanges.includes(range)) {
             return;
         }
         // If last peak in range summitted and badge not previously won, assign a badge
@@ -61,14 +84,37 @@ export default function MyProfile({ data }) {
             // Find correct png 
             const formatRangeName = rangeName.toLowerCase();
             let badgeFileName = formatRangeName.replaceAll(' ', '_');
-            badgeFileName += '_range.png';
+            badgeFileName = badgeFileName.replaceAll('-', '_');
+            badgeFileName = 'badges/' + badgeFileName + '_range.png';
 
             // Adds new range badge to user profile
             update(ref(db, `users/${currentUser.uid}/badges/`), {[rangeName]: badgeFileName})
-            return `${rangeName}`
+            return badgeFileName;
         } else { // Otherwise we don't give a badge
+            console.log("THE ELSE")
             return;
         }
+    }
+
+    // Determines achievement award and adds badge to db
+    const determineAchievementBadge = (peakArr) => {
+        let badgeFileName;
+        
+        // Determines if a new achievement badge has been won
+        if (peakArr.length === 25) {
+            badgeFileName = "badges/smelly_foot_badge.png";
+        } else if (peakArr.length === 50) {
+            badgeFileName = "badges/frost_foot_badge.png";
+        } else if (peakArr.length === 75) {
+            badgeFileName = "badges/trench_foot_badge.png";
+        } else if (peakArr.length === 100) {
+            badgeFileName = "badges/big_foot_badge.png";
+        } else {
+            return;
+        }
+ 
+        // Adds new range badge to user profile
+        update(ref(db, `users/${currentUser.uid}/`), {achievement: badgeFileName})
     }
 
     useEffect(() => {
@@ -86,17 +132,10 @@ export default function MyProfile({ data }) {
             if (snapshot.exists()) {
                 setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
             } else {
-                // Get selected peaks profile data from state to publish to db
-                let peakName = summit[1];
-
-                // Extracts sortable peak name from peak string
-                if (summit[1].includes('[')) {
-                    const re = /\[(.*?)\]/
-                    peakName = re.exec(summit[1]);
-                    peakName = peakName[1]
-                }
-
-                const peakProfile = data.filter(peak => peak.name === peakName);
+                let id = summit[0]
+                
+                // Gets range data for peak from db
+                const peakProfile = data.filter(peak => peak.key === id);
                 const range = peakProfile[0].range;
                 
                 set(ref(db, `users/${currentUser.uid}/summits/${summit[0]}`), {name:summit[1], range:range})
@@ -141,68 +180,23 @@ export default function MyProfile({ data }) {
                                 trips:pTrips
                             })
                 });
-                // console.log(myPeaksArr)
+            determineAchievementBadge(myPeaksArr);    
             setMyPeakList(myPeaksArr)
+            
         })
-    }
-
-    // If the logout button is clicked, it will navigate user to the homepage
-    // async function handleLogout() {
-    //     setError('')
-    //     try {
-    //         await logout()
-    //         navigate("/")
-    //     } catch {
-    //         setError('Failed to log out')
-    //     }
-    //     }
-    
-    // const handleHomepage =() => {
-    //     navigate("/")
-    //     }
-    async function handleLogout() {
-        setError('')
-        try {
-            await logout()
-            navigate("/")
-        } catch {
-            setError('Failed to log out')
-        }
-    }
-    
-    const handleHomepage =() => {
-        navigate("/")
     }
 
     return (
         <main id='main'>
             <section id='container-right'>
-                    {/* <p id='title'>WEATHERING HEIGHTS</p> */}
-                    {/* <div className=''> */}
-                        {/* <section> */}
-                        {/* <button onClick={handleMap}>MAP</button>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button> */}
-                        {/* </section> */}
-                        
-                    {/* </div> */}
-                {/* <p id='title'>WEATHERING HEIGHTS</p>
-                
-                <h4>MY PROFILE</h4> */}
 
-                {/* <div>
-                    <BadgeDisplay data={data}/>
-                </div> */}
+            {achievement && <img src={achievement} 
+                                alt={"Users achievement badge"} 
+                                style={img_size} 
+                                className="zoom">
+                            </img>}
+            {badges && <BadgeDisplay badges={badges} style={img_size}/>}
 
-                {/* <div className=''>
-                    <section>
-                        <button onClick={handleHomepage}>HOMEPAGE</button>
-                        <button onClick={handleLogout}>LOGOUT</button>
-                        <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
-                        <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
-                    </section>
-                    
-                </div> */}
             </section>
             <section id='container-left'>
                 <section>
@@ -219,4 +213,8 @@ export default function MyProfile({ data }) {
             </section>
         </main>
         );
-}
+};
+
+MyProfile.propTypes = {
+    data: PropTypes.array.isRequired, 
+};

@@ -18,7 +18,7 @@ import MyProfile from './MyProfile';
 import Map from './Map'
 import UpdateWeatherButton from './UpdateWeatherButton.js';
 import { createBrowserHistory } from "history";
-// import FIREBASE_API_KEY from './firebase_api_key.js';
+import FIREBASE_API_KEY from './firebase_api_key.js';
 
 function App() {
   // console.log(FIREBASE_API_KEY)
@@ -109,6 +109,7 @@ function App() {
             </AuthProvider>
           </Router>
         </div>
+        
       // </main>
       // </Container>
     

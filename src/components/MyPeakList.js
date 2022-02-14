@@ -30,13 +30,21 @@ const Container = styled.div`
     }
 `;
 
-const MyPeakList = ({ peaks, updateList, handleUpdateTripError }) => {
-
+const MyPeakList = ({ peaks, updateList }) => {
+    const peaksLength = peaks.length; 
     const getPeakListJSX = (peaks) => {
         return peaks.map((peak)=>{
-            // console.log('here is the peak info being passed to MyPeak')
-            // console.log(peak.key, peak.id, peak.name, peak.trips)
-            return (<MyPeak key={peak.key} pKey={peak.key} id={peak.id} name={peak.name} trips={peak.trips} updateList={updateList} handleUpdateTripError={handleUpdateTripError}/>
+            return (
+                <MyPeak 
+                    key={peak.key} 
+                    pKey={peak.key} 
+                    id={peak.id} 
+                    name={peak.name} 
+                    range={peak.range} 
+                    trips={peak.trips} 
+                    updateList={updateList}
+                    numPeaks={peaksLength}
+                    />
             )
         })
     }
@@ -53,8 +61,7 @@ const MyPeakList = ({ peaks, updateList, handleUpdateTripError }) => {
             {getPeakListJSX(peaks)}
         </section>
     )
-    };
-
+};
 
 MyPeakList.propTypes = {
     peaks: PropTypes.arrayOf(
@@ -63,10 +70,8 @@ MyPeakList.propTypes = {
             id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             trips: PropTypes.array,
-            })
-            ).isRequired, 
-            updateList: PropTypes.func.isRequired,
-            handleUpdateTripError: PropTypes.func.isRequired
+        })).isRequired, 
+        updateList: PropTypes.func.isRequired
     };
 
 export default MyPeakList;

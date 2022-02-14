@@ -154,6 +154,9 @@ const Accordion = (props) => {
     const [selectedLink, setSelectedLink] = useState(null)
 
     const handleMapPopup = () => {
+        // console.log("WE IN MAP!")
+        // console.log(selectedPeak)
+        // console.log(selectedLink)
         setMapPopup(true)
         bulgerList.forEach(peak => {
             if (peak.name===selectedPeak) {
@@ -294,7 +297,7 @@ const Accordion = (props) => {
                                 <div> 📍 {item.coordinates}</div>
                             </div>
                             <div className='mbutton-loc'>
-                                <button onClick={handleMapPopup} className='button summit-btn'>SEE MAP</button>
+                                <button onClick={handleMapPopup} className='mbutton-loc'>SEE MAP</button>
                                 <Map trigger={mapPopup} setTrigger={setMapPopup} index={selectedIndex} name={selectedPeak} link={selectedLink}/>
                             </div>
                         </Dropdown>:
