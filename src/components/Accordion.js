@@ -274,7 +274,8 @@ const Accordion = (props) => {
             </div>
             {console.log(sortby)}
             <div className='accordion-card'>
-            <div className='accordion-title'>100 Peaks of Washington</div>
+            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+            {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
                 return(
                     <>
