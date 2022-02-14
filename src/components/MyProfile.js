@@ -20,7 +20,6 @@ export default function MyProfile({ data }) {
     const [myPeakList, setMyPeakList] = useState([])
     const [badgedRanges, setBadgedRanges] = useState();
     const [badges, setBadges] = useState();
-    
 
     let peakNames = []
     for (let peak of data) {
@@ -37,7 +36,6 @@ export default function MyProfile({ data }) {
             const data = snapshot.val();
             const ranges = Object.keys(data);
             const badges = Object.values(data);
-            // console.log(badges)
             
             setBadges(badges);
             setBadgedRanges(ranges);
@@ -45,19 +43,24 @@ export default function MyProfile({ data }) {
     }, []);
 
     const determineRangeComplete = (rangeName) => {
+        console.log({rangeName})
         // Filter for mandatory peak objects to complete particular range
         const range = data.filter(peak => peak.range === rangeName);
         const rangeLen = range.length;
+        console.log(range)
+        console.log({rangeLen})
 
         // Filter for user's list of hiked peak objects in particular range
         const userRange = myPeakList.filter(peak => peak.range === rangeName);
         const userRangeLen = userRange.length;
+        console.log(userRange)
+        console.log({userRangeLen})
 
         if (badgedRanges === undefined) {
             return;
         }
         // If badge already won, skip
-        else if (badges[0].includes(rangeLen)) {
+        else if (badgedRanges.includes(range)) {
             return;
         }
         // If last peak in range summitted and badge not previously won, assign a badge
@@ -72,6 +75,7 @@ export default function MyProfile({ data }) {
             update(ref(db, `users/${currentUser.uid}/badges/`), {[rangeName]: badgeFileName})
             return badgeFileName;
         } else { // Otherwise we don't give a badge
+            console.log("is it the else?")
             return;
         }
     }
@@ -93,6 +97,7 @@ export default function MyProfile({ data }) {
             } else {
                 // Get selected peaks profile data from state to publish to db
                 let peakName = summit[1];
+                let id = summit[0]
 
                 // Extracts sortable peak name from peak string
                 if (summit[1].includes('[')) {
@@ -100,9 +105,14 @@ export default function MyProfile({ data }) {
                     peakName = re.exec(summit[1]);
                     peakName = peakName[1]
                 }
-
-                const peakProfile = data.filter(peak => peak.name === peakName);
+                console.log("handleAddSummit")
+                console.log({peakName})
+                // Gets range data for peak from db
+                // const peakProfile = data.filter(peak => peak.name === peakName);
+                const peakProfile = data.filter(peak => peak.key === id);
                 const range = peakProfile[0].range;
+                console.log("handleAddSummit")
+                console.log({range})
                 
                 set(ref(db, `users/${currentUser.uid}/summits/${summit[0]}`), {name:summit[1], range:range})
                 determineRangeComplete(range);
@@ -143,7 +153,6 @@ export default function MyProfile({ data }) {
                                 trips:pTrips
                             })
                 });
-                // console.log(myPeaksArr)
             setMyPeakList(myPeaksArr)
         })
     }
@@ -152,17 +161,8 @@ export default function MyProfile({ data }) {
         <main id='main'>
             <section id='container-right'>
 
-                {/* <div> */}
-                    {badges && <BadgeDisplay data={data} badges={badges}/>}
-                {/* </div> */}
+            {badges && <BadgeDisplay badges={badges}/>}
 
-                {/* <div className=''>
-                    <section>
-                        <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
-                        <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
-                    </section>
-                    
-                </div> */}
             </section>
             <section id='container-left'>
                 <section>

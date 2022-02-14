@@ -9,9 +9,9 @@ const img_size = {
     borderWidth: 1,
 };
 
-const BadgeDisplay = ({ data, badges }) => {
+const BadgeDisplay = ({ badges }) => {
     // Generate badge components from array of badges 
-    const badgeComponents = badges.map((badge, index) => {
+    const badgeComponents = badges.map((badge) => {
         return (
             <img src={badge} style={img_size}></img>
         )
