@@ -11,7 +11,6 @@ import './stylesheets/MyProfile.css';
 import './stylesheets/Misc.css';
 import './stylesheets/BadgeDisplay.css';
 
-// React Styling
 const img_size = {
     width: 350,
     height: 350,
@@ -23,7 +22,7 @@ const img_size = {
 
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const { currentUser } = useAuth()
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
     const [badgedRanges, setBadgedRanges] = useState([]);
@@ -122,7 +121,7 @@ export default function MyProfile({ data }) {
     
     const handleAddSummitPopup= () => {
         setAddSummitPopup(true)
-    }
+        }
     
     const handleAddSummit = (summit) => {
         setError('')

@@ -36,7 +36,7 @@ const MyPeak = ({ pKey, id, name, range, trips, updateList, numPeaks, handleUpda
         setClicked(null)
         set(ref(db, `users/${currentUser.uid}/summits/${id}/trips/${date}`), notes)
         updateList()
-    }
+        }
 
     const deleteSummit = () => {
         // Removes current peak and range from user info
