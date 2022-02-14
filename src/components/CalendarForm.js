@@ -2,20 +2,15 @@
 import React from 'react';
 import { useRef } from 'react';
 import './stylesheets/CalendarForm.css';
-import { FiAlignRight } from 'react-icons/fi';
-// require('dotenv').config();
-// import KEYS from './firebase_api_key'
+import KEYS from './firebase_api_key';
+
     function CalendarForm(props) {
     //gapi window
     var gapi = window.gapi
-    /* 
-    Update with your own Client Id and Api key 
-    */
 
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
     var SCOPES = "https://www.googleapis.com/auth/calendar.events"
 
-    // console.log(process.env.REACT_APP_CLIENT_ID);
     
 
     //ref variables
@@ -62,16 +57,9 @@ import { FiAlignRight } from 'react-icons/fi';
     gapi.load('client:auth2', () => {
         console.log('loaded client')
 
-        // gapi.client.init({
-        // apiKey: API_KEY,
-        // clientId: CLIENT_ID,
-        // discoveryDocs: DISCOVERY_DOCS,
-        // scope: SCOPES,
-        // })
-
         gapi.client.init({
-            // apiKey: KEYS['GOOGLE_API_KEY'],
-            // clientId: KEYS['GOOGLE_ClIENT_ID'],
+            apiKey: KEYS['GOOGLE_API_KEY'],
+            clientId: KEYS['GOOGLE_ClIENT_ID'],
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES,
         })
@@ -84,7 +72,6 @@ import { FiAlignRight } from 'react-icons/fi';
         var event = {
             'summary': enteredName,
             'location': enteredPeak,
-            // 'description': enteredDesc + "Weather Info:" + enteredTemp
             'description': enteredDesc + "Weather Info: Temperature: " + enteredTemp + " Wind Speed " + enteredWind + " Chance of Precipitation " + enteredPrecip,
             'start': {
             'dateTime': new Date (enteredDate + " " + enteredStartTime),
@@ -119,10 +106,6 @@ import { FiAlignRight } from 'react-icons/fi';
             window.open(event.htmlLink)
         })
         
-
-        /*
-            Uncomment the following block to get events
-        */
 
         // get events
         gapi.client.calendar.events.list({

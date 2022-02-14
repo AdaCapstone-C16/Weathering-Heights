@@ -1,4 +1,4 @@
-//maybe here is where I read in data on mountains from the database
+//Test Dummy Data
 
 
 export const Data = [

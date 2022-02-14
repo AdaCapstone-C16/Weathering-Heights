@@ -1,9 +1,6 @@
 
-import React, { useState } from 'react';
-//import { Accordion } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import React from 'react';
 import Accordion from './Accordion';
-import CalendarForm from './CalendarForm';
 import './stylesheets/Homepage.css';
 
 export default function Homepage(props) {
