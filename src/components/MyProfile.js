@@ -65,6 +65,7 @@ export default function MyProfile({ data }) {
             // Find correct png 
             const formatRangeName = rangeName.toLowerCase();
             let badgeFileName = formatRangeName.replaceAll(' ', '_');
+            badgeFileName = badgeFileName.replaceAll('-', '_');
             badgeFileName = 'badges/' + badgeFileName + '_range.png';
 
             // Adds new range badge to user profile
@@ -151,17 +152,17 @@ export default function MyProfile({ data }) {
         <main id='main'>
             <section id='container-right'>
 
-                <div>
+                {/* <div> */}
                     {badges && <BadgeDisplay data={data} badges={badges}/>}
-                </div>
+                {/* </div> */}
 
-                <div className=''>
+                {/* <div className=''>
                     <section>
                         <button onClick={handleAddSummitPopup}>ADD A SUMMIT</button>
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </section>
                     
-                </div>
+                </div> */}
             </section>
             <section id='container-left'>
                 <section>
