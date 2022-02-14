@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { ref, set, remove, onValue } from 'firebase/database';
+import { ref, set, remove, update } from 'firebase/database';
 import {db} from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import Trip from './Trip';
@@ -54,7 +54,6 @@ span{
 }
 `;
 
-
 const Dropdown = styled.div`
 background: #DEDFEC;
 color: #000000;
@@ -72,7 +71,7 @@ color: #000000;
     }
 `;
 
-const Peak = ({ pKey, id, name, range, trips, updateList }) => {
+const Peak = ({ pKey, id, name, range, trips, updateList, numPeaks }) => {
     const [addTripPopup, setAddTripPopup] = useState(false)
     const [deleteSummitPopup, setDeleteSummitPopup] = useState(false)
     const { currentUser } = useAuth()
@@ -103,6 +102,26 @@ const Peak = ({ pKey, id, name, range, trips, updateList }) => {
         // Removes current peak and range from user info
         remove(ref(db, `users/${currentUser.uid}/summits/${id}`))
         remove(ref(db, `users/${currentUser.uid}/badges/${range}`))
+
+        // Adjusts badge if deletion reduces achievement level
+        let badgeFileName;
+        
+        if (numPeaks <= 25) {
+            remove(ref(db, `users/${currentUser.uid}/achievement`));
+        } else if (numPeaks <= 50) {
+            badgeFileName = "badges/smelly_foot_badge.png";
+        }  else if (numPeaks <= 75) {
+            badgeFileName = "badges/frost_foot_badge.png";
+        } else if (numPeaks <= 100) {
+            badgeFileName = "badges/trench_foot_badge.png";
+        } else {
+            return;
+        }
+
+        if (badgeFileName) {
+            // Adds new range badge to user profile
+            update(ref(db, `users/${currentUser.uid}/`), {achievement: badgeFileName})
+        }
 
         updateList()
     }

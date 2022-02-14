@@ -1,25 +1,40 @@
+import PropTypes from 'prop-types';
 import './stylesheets/BadgeDisplay.css';
 
-// React Styling
-const img_size = {
-    width: 350,
-    height: 350,
-    resizeMode: "contain",
-    alignSelf: "center",
-    borderWidth: 1,
-};
+const BadgeDisplay = ({ badges, style }) => {
 
-const BadgeDisplay = ({ badges }) => {
     // Generate badge components from array of badges 
-    const badgeComponents = badges.map((badge) => {
+    const badgeComponents = badges.map((badge, index) => {
+        // Create alt text for badge img
+        // /(?<=^badges\/)(.*)(.*)\.[^.]+$/
+        
+        const re = /(?<=^badges\/)(.*)(.*)\.[^.]+$/
+        let altText = re.exec(badge);
+        altText = altText[1];
+        altText = altText.replace('_range', '');
+        altText = altText.replaceAll('_', ' ');
+        altText += ' badge';
+    
         return (
-            <img src={badge} style={img_size}></img>
+            <img 
+                src={badge} 
+                alt={altText}
+                style={style} 
+                className="zoom" 
+                key={index}
+            >
+            </img>
         )
     });
 
     return (
-        <div className="grid">{badgeComponents}</div>
+        <div className="badge-div">{badgeComponents}</div>
     )
+};
+
+BadgeDisplay.propTypes = {
+    badges: PropTypes.array.isRequired, 
+    style: PropTypes.object.isRequired, 
 };
 
 export default BadgeDisplay;
