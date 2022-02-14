@@ -2,8 +2,8 @@ import './stylesheets/BadgeDisplay.css';
 
 // React Styling
 const img_size = {
-    width: 150,
-    height: 150,
+    width: 350,
+    height: 350,
     resizeMode: "contain",
     alignSelf: "center",
     borderWidth: 1,

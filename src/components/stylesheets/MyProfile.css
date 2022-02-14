@@ -24,8 +24,9 @@ body{
     background-image: url("../stylesheets/test.jpg");
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
 
+    /* justify-content: center; */
+    
 }
 
 #container-left {
