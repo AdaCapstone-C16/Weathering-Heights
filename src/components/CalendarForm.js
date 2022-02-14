@@ -82,7 +82,7 @@ import KEYS from './firebase_api_key';
             'timeZone': 'America/Los_Angeles'
             },
             'recurrence': [
-            'RRULE:FREQ=DAILY;COUNT=2'
+            'RRULE:FREQ=DAILY;COUNT=1'
             ],
             'attendees': [
             {'email': enteredAttendee}

@@ -38,6 +38,14 @@ const Container = styled.div`
         margin-bottom: 1%;
         float: right;
     }
+    .scroll {
+        height:675px;
+    }
+    
+    .scroll {
+        overflow:hidden; 
+        overflow-y:scroll;
+    }
 `;
 
 const Wrap = styled.div`
@@ -250,7 +258,7 @@ const Accordion = (props) => {
     <CalendarForm className='cal-form' mountain={selectedPeak} weather={selectedPeakWeather}></CalendarForm>
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
-            <Container>
+            <Container className='scroll'>
             <div className='option-bar'>
                 <button className='refresh'>Refresh Weather</button>
                 {selection}
