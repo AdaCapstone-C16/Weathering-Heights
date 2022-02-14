@@ -6,10 +6,8 @@ export default function Map({trigger, setTrigger, index, name, link}) {
     const handleClose = () => {
         setTrigger(false)
     }
-    let indexNew = index+1
-    const mapURL = indexNew+'_'+(name.replace(/ /g,''))+'.html'
-    console.log('printing',mapURL)
-    console.log(link)
+    const mapURL = index+'_'+(name.replace(/ /g,''))+'.html'
+    const peakLink = 'https://www.peakbagger.com/'+link
     
     return (trigger) ? ( 
         <div className='mpopup'>
@@ -17,7 +15,7 @@ export default function Map({trigger, setTrigger, index, name, link}) {
                 <h3 className='mtitle'>{name} Map</h3>
                 <p className='mtitle-2'>The following map shows climber gps tracks from successful summits</p>
                 <iframe className='map' title="myMap" src={mapURL}  width="500" height="500"></iframe>
-                <p className='mtitle-3'>See <a href={link}>Peak Baggers</a> to download gpx files.</p>
+                <p className='mtitle-3'>See <a href={peakLink}>Peak Baggers</a> to download gpx files.</p>
                 <div className='button-loc'>
                     <button onClick={handleClose} className='mbutton'>CLOSE</button>
                 </div>

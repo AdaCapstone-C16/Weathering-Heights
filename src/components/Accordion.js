@@ -154,8 +154,12 @@ const Accordion = (props) => {
     const [selectedLink, setSelectedLink] = useState(null)
 
     const handleMapPopup = () => {
-        console.log("In map popup")
         setMapPopup(true)
+        bulgerList.forEach(peak => {
+            if (peak.name===selectedPeak) {
+                setSelectedIndex(peak.key)
+            }
+        });
     }
     // console.log("Inside accordion")
     // console.log(props);
@@ -170,7 +174,6 @@ const Accordion = (props) => {
         const myList = getSortedList(sortby);
         setSelectedPeak(myList[index].name)
         setSelectedPeakWeather([myList[index].temp, myList[index].windSpeed, myList[index].windDir, myList[index].chance_precip])
-        setSelectedIndex(index)
         setSelectedLink(myList[index].link)
     }
 
@@ -287,7 +290,7 @@ const Accordion = (props) => {
                                 <div> 🥇 {item.rank}</div> 
                                 <div> ❕ {item.indigenous_name}</div>
                                 <div> 🧗 {item.elevation}</div>
-                                <div> 🔗 {item.link}</div>
+                                <div><a href={'https://www.peakbagger.com/'+item.link}> 🔗  Peak Baggers - {item.name}</a></div>
                                 <div> 📍 {item.coordinates}</div>
                             </div>
                             <div className='mbutton-loc'>
