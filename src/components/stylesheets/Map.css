@@ -1,4 +1,6 @@
-.spopup {
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
+.mpopup {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +12,7 @@
     align-items: center;
 }
 
-.spopup-inner {
+.mpopup-inner {
     border-radius: 12px;
     justify-content: center;
     width: 1%;
@@ -18,23 +20,26 @@
     position: relative;
     padding: 32px;
     width: 100%;
-    max-width: 640px;
+    max-width: 1000px;
     background-color: #FFF;
+    padding-left:10%
 }
 
-
-.stitle {
-    margin-left: 30%;
+.mtitle {
+    color: black;
     text-decoration: underline;
+    padding-left:15%
 }
 
-.stitle-2 {
-    padding-bottom: .25%;
-    padding-top: 2%;
-    font-size: x-large;
+.mtitle-2 {
+    color: black;
 }
 
-.sbutton {
+.mtitle-3 {
+    color: black;
+    padding-left: 10%;
+}
+.mbutton {
     margin: 5%;
     display: inline-block;    
     border-radius: 66px;
@@ -50,7 +55,7 @@
     font-size: 16px;
 }
 
-.sbutton:hover {
+.mbutton:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -65,8 +70,10 @@
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
 }
 
-.sbutton-container {
-    display: flex;
-    flex-direction: row;
-    margin-left: 15%;
+.map {
+    padding-left: 10%;
+}
+
+.m-inner-button-loc {
+    padding-left: 15%;
 }

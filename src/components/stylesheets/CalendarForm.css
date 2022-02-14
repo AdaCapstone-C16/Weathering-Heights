@@ -29,3 +29,32 @@
 .google-form-button{
     float: right;
 }
+
+.add-event {
+    margin-top: 0%;
+    display: inline-block;    
+    border-radius: 66px;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    border: none;
+}
+
+.add-event:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}

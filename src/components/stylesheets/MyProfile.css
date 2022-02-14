@@ -1,13 +1,5 @@
-/* @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
-if you want the font to be thicker, add ",200" 
-or any other measure behind the ":100" in the url above */
-
-/* example for styling with this font:
-body{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-} */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
 #main {
     min-height: 100vh;
     min-width: 100vh;
@@ -22,14 +14,15 @@ body{
     background-color: #504C54;
     width: 60%;
     background-image: url("../stylesheets/test.jpg");
+    background-size: auto;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 }
 
 #container-left {
     background-color: #504C54;
     width: 40%
-
 }
 
 
@@ -38,12 +31,6 @@ li {
     list-style-type: none;
     background-color: white;
     margin: 10px 0;
-}
-
-.trips {
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
 }
 
 .my-summit-title-container {
@@ -58,4 +45,35 @@ li {
     padding-left: 10%;
     padding-top: 5%;
     color: #FFFFFF;
+}
+
+.error-button {
+    margin-left: 16%;
+    display: inline-block;    
+    border-radius: 66px;
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+.error-button:hover {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 0;
+    color: #FFFBFB;
+    background: #CCA19A;
+    line-height: 1.15;
+    font-size: 16px;
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
 }

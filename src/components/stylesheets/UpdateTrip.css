@@ -1,4 +1,4 @@
-.button {
+.ut-button {
     margin: 5%;
     display: inline-block;    
     border-radius: 66px;
@@ -14,7 +14,7 @@
     font-size: 16px;
 }
 
-.button:hover {
+.ut-button:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -29,33 +29,17 @@
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
 }
 
-.container {
+.ut-container {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
     justify-content: center;
-    width: 1%;
     background-color: #FFFBFB;
     position: relative;
     padding: 32px;
-    /* width: 50%; */
-        /* 
-        
-        max-width: 640px;
-        background-color: #FFF; */
 }
 
-.upper-container {
-    align-items: center;
-    padding-left: 8%;
-}
-
-.title {
-margin-left: 35%;
-text-decoration: underline;
-}
-
-.container-outer {
+.ut-container-outer {
     position: fixed;
     top: 0;
     left: 0;
@@ -67,13 +51,18 @@ text-decoration: underline;
     align-items: center;
 }
 
-.title-2 {
-    margin-left: -10%;
+.ut-title {
+margin-left: 35%;
+text-decoration: underline;
+}
+
+
+.ut-title-2 {
     padding-right: .25%;
     padding-bottom: .25%;
 }
 
-.date-container {
+.ut-date-container {
     display: flex;
     flex-direction: row;
     width: 300%;
@@ -81,8 +70,13 @@ text-decoration: underline;
     padding-top: 2%;    
 }
 
-.button-container {
+.ut-button-container {
     display: flex;
     flex-direction: row;
     margin-left: 15%;
+}
+
+.ut-upper-container {
+    display: flex;
+    flex-direction: column;
 }

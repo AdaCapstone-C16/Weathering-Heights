@@ -11,7 +11,6 @@ import './stylesheets/MyProfile.css';
 import './stylesheets/Misc.css';
 import './stylesheets/BadgeDisplay.css';
 
-// React Styling
 const img_size = {
     width: 350,
     height: 350,
@@ -20,10 +19,10 @@ const img_size = {
     borderWidth: 1,
 };
 
+
 export default function MyProfile({ data }) {
     const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
-
+    const { currentUser } = useAuth()
     const [addSummitPopup, setAddSummitPopup] = useState(false)
     const [myPeakList, setMyPeakList] = useState([])
     const [badgedRanges, setBadgedRanges] = useState([]);
@@ -37,7 +36,7 @@ export default function MyProfile({ data }) {
         } else if (peak) {
             peakNames.push({value:peak.key, label:peak.name})
         };
-    };
+        };
 
     useEffect(() => {
         // Retrieves list of user's badge names
@@ -112,7 +111,6 @@ export default function MyProfile({ data }) {
         } else {
             return;
         }
- 
         // Adds new range badge to user profile
         update(ref(db, `users/${currentUser.uid}/`), {achievement: badgeFileName})
     }
@@ -123,14 +121,13 @@ export default function MyProfile({ data }) {
     
     const handleAddSummitPopup= () => {
         setAddSummitPopup(true)
-    }
+        }
     
     const handleAddSummit = (summit) => {
         setError('')
         get(child(ref(db), `users/${currentUser.uid}/summits/${summit[0]}`)).then((snapshot) => {
             if (snapshot.exists()) {
-                console.log('This summit is already in your summits')
-                setError('This summit already exists in your profile')
+                setError('THIS SUMMIT ALREADY EXISTS IN YOUR PROFILE')
             } else {
                 let id = summit[0]
                 
@@ -146,8 +143,12 @@ export default function MyProfile({ data }) {
         
     const handleExitError = () => {
         setError('')
-    }
+        }
 
+    const handleUpdateTripError = () => {
+        setError('YOU MUST ENTER A VALID NEW TRIP REPORT')
+        }
+    
     const getMyPeakData = () => {
         let myPeaksArr = []
         const dbRef = ref(db);
@@ -203,8 +204,8 @@ export default function MyProfile({ data }) {
                         <AddSummit trigger={addSummitPopup} setTrigger={setAddSummitPopup} data={peakNames} handleAddSummit={handleAddSummit}></AddSummit>
                     </div>
                     <div>
-                        {error && <Alert variant="danger">{error}<button onClick={handleExitError}>OK</button></Alert>}
-                        <MyPeakList peaks={myPeakList} updateList={getMyPeakData}></MyPeakList>
+                        {error && <Alert variant="danger">{error}<button onClick={handleExitError} className='error-button'>OK</button></Alert>}
+                        <MyPeakList peaks={myPeakList} updateList={getMyPeakData} handleUpdateTripError={handleUpdateTripError}></MyPeakList>
                     </div>
                 </section>
             </section>

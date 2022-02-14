@@ -17,19 +17,21 @@ const AddSummit = ({trigger, setTrigger, data, handleAddSummit}) => {
         }
 
     const handleCancel = () => {
-            setTrigger(false) 
-            }
+        setTrigger(false) 
+        }
 
     return ( trigger) ? (
-        <div className="popup">
-            <div className="popup-inner">
-                <h2>Add New Summit:</h2>
+        <div className="spopup">
+            <div className="spopup-inner">
+                <h2 className='stitle'>ADD SUMMIT</h2>
                 <form>
-                    <label> Select a Bulger</label>
+                    <label className='stitle-2'> SELECT BULGER</label>
                     <Select options={data} onChange={handleSummitAdd}/>
                 </form>
-                <button className="close-button" onClick={handleClose}>Add!</button>
-                <button onClick={handleCancel}> Cancel </button>
+                <div className='sbutton-container'>
+                    <button className="sbutton" onClick={handleClose}>ADD!</button>
+                    <button className="sbutton" onClick={handleCancel}> CANCEL </button>
+                </div>
             </div>
         </div>
     
