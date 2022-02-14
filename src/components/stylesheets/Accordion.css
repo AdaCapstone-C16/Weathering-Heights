@@ -18,27 +18,28 @@
     font-weight: 300;
 }
 
-/* .mbutton-loc {
-    padding-left: 50%;
+.seemap-btn-loc {
+    padding-left: 40%;
     padding-top: 2.5%;
-} */
+}
 
-.mbutton-loc {
+.seemap-btn {
     margin: 5%;
     display: inline-block;    
     border-radius: 66px;
     outline: none;
     cursor: pointer;
     font-weight: 600;
-    /* padding: 12px 24px; */
+    padding: 12px 24px;
     color: #FFFBFB;
     background: #CCA19A;
     line-height: 1.15;
     font-size: 16px;
-    padding-right: 10%;
+    padding-right: 15%;
+    border: none;
 }
 
-/* .mbutton-loc:hover {
+.seemap-btn:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -50,4 +51,4 @@
     font-size: 16px;
     transition: all .1s ease;
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
-} */
+}

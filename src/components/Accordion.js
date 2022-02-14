@@ -289,11 +289,21 @@ const Accordion = (props) => {
                     </Wrap>
                     {clicked === index ? 
                         <Dropdown>
-                        <div> 🥇   Rank:   {item.rank}</div> 
-                        <div> ❕   Indigenous Name: --  {item.indigenous_name}</div>
-                        <div> 🧗   Elevation:   {item.elevation}</div>
-                        <div> 🔗   Peak Bagger's Link:   {item.link}</div>
-                        <div> 📍   Coordinates:   {item.coordinates}</div>
+                            <div>
+                                <div> 🥇   Rank:   {item.rank}</div> 
+                                <div> ❕   Indigenous Name: --  {item.indigenous_name}</div>
+                                <div> 🧗   Elevation:   {item.elevation}</div>
+                                <div> 🔗   Peak Bagger's Link:   {item.link}</div>
+                                <div> 📍   Coordinates:   {item.coordinates}</div>
+                            </div>
+                            <div className='seemap-btn-loc'>
+                                <button onClick={handleMapPopup} className='seemap-btn'>SEE MAP</button>
+                                <Map trigger={mapPopup} setTrigger={setMapPopup} index={selectedIndex} name={selectedPeak} link={selectedLink}/>
+                            </div>
+                            {/* <div className='mbutton-loc'>
+                                <button onClick={handleMapPopup} className='button summit-btn'>SEE MAP</button>
+                                <Map trigger={mapPopup} setTrigger={setMapPopup} index={selectedIndex} name={selectedPeak} link={selectedLink}/>
+                            </div> */}
                         </Dropdown>:
                         null}
                     </>
