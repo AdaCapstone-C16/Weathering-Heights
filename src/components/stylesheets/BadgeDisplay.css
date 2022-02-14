@@ -1,10 +1,11 @@
-.img-wrapper {
-    overflow: hidden;
-}
-img.hover-zoom {
+.zoom {
     transition: all 0.3s ease 0s;
-    
 }
-img.hover-zoom:hover {
+
+.zoom:hover {
     transform: scale(1.25);
+}
+
+.badge-div {
+    justify-content: space-between;
 }

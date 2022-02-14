@@ -1,41 +1,40 @@
+import PropTypes from 'prop-types';
 import './stylesheets/BadgeDisplay.css';
 
-// React Styling
-const img_size = {
-    width: 150,
-    height: 150,
-    resizeMode: "contain",
-    alignSelf: "center",
-    borderWidth: 1,
-};
-
-const BadgeDisplay = ({ data, badges }) => {
+const BadgeDisplay = ({ badges, style }) => {
 
     // Generate badge components from array of badges 
     const badgeComponents = badges.map((badge, index) => {
-
+        // Create alt text for badge img
+        // /(?<=^badges\/)(.*)(.*)\.[^.]+$/
+        
+        const re = /(?<=^badges\/)(.*)(.*)\.[^.]+$/
+        let altText = re.exec(badge);
+        altText = altText[1];
+        altText = altText.replace('_range', '');
+        altText = altText.replaceAll('_', ' ');
+        altText += ' badge';
+    
         return (
-            <img src={badge} style={img_size}></img>
+            <img 
+                src={badge} 
+                alt={altText}
+                style={style} 
+                className="zoom" 
+                key={index}
+            >
+            </img>
         )
     });
 
-
-
     return (
-        <div className="grid">{badgeComponents}</div>
-        // <>
-        //     {/* <img src="../../public/badges/big_foot_badge.png" alt="big foot badge"></img> */}
-        //     <div className="img-wrapper">   
-        //         <img 
-        //             src="badges/wenatchee_mountains_range.png"
-        //             // src={require("public/badges/wenatchee_mountains_range.png")} 
-        //             alt="please be smaller"
-        //             style={img_size}
-        //             className="hover-zoom"
-        //         ></img>
-        //     </div> 
-        // </>
+        <div className="badge-div">{badgeComponents}</div>
     )
+};
+
+BadgeDisplay.propTypes = {
+    badges: PropTypes.array.isRequired, 
+    style: PropTypes.object.isRequired, 
 };
 
 export default BadgeDisplay;
