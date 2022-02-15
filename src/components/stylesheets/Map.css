@@ -33,11 +33,13 @@
 
 .mtitle-2 {
     color: black;
+    font-size: larger;
 }
 
 .mtitle-3 {
     color: black;
     padding-left: 10%;
+    font-size: larger;
 }
 .mbutton {
     margin: 5%;

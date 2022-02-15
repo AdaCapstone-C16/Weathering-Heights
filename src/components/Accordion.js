@@ -254,7 +254,7 @@ const Accordion = (props) => {
     <CalendarForm className='cal-form' mountain={selectedPeak} weather={selectedPeakWeather}></CalendarForm>
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
-            <Container>
+            <Container className='scroll'>
                 <div className='accordion-card'>
                     <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
                         <div className="weather-for">Weather for: {weatherFor}</div>
