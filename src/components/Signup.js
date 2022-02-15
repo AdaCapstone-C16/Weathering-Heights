@@ -1,7 +1,7 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../components/stylesheets/PopUps.css';
 import '../components/stylesheets/Signup.css';
 

@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import CalendarForm from './CalendarForm';
+import UpdateWeatherButton from './UpdateWeatherButton';
+import Map from './Map';
 import './stylesheets/Accordion.css';
-import Map from './Map'
 import './stylesheets/Map.css';
 
 // import peaksContext from '../contexts/peaksContext';
@@ -120,29 +121,9 @@ const Dropdown = styled.div`
     }
 `;
 
-// const Dropdown = styled.div`
-// background: #DEDFEC;
-// color: #000000;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: left;
-//     border-bottom: 1px solid #000000;
-//     border-top: 1px solid #000000;
-//     border-radius: 25px;
-//     margin-left: 30px;
-//     margin-right: 30px;
-    
-//     p{
-//         font-size: 1rem;
-//     }
-// `;
-
-
 //-----------------------------------------------{Accordion Function}------------------------------------------------------//
 
 const Accordion = (props) => {
-
-    //const a = useContext(peaksContext)
 
     const bulgerList = props.data;
     //lift this state
@@ -156,9 +137,6 @@ const Accordion = (props) => {
     const [selectedLink, setSelectedLink] = useState(null)
 
     const handleMapPopup = () => {
-        // console.log("WE IN MAP!")
-        // console.log(selectedPeak)
-        // console.log(selectedLink)
         setMapPopup(true)
         bulgerList.forEach(peak => {
             if (peak.name===selectedPeak) {
@@ -166,9 +144,6 @@ const Accordion = (props) => {
             }
         });
     }
-    // console.log("Inside accordion")
-    // console.log(props);
-
 
     const toggle = (index) => {
         //if clicked question is already open, then close it 
@@ -182,7 +157,6 @@ const Accordion = (props) => {
         setSelectedPeakWeather([myList[index].temp, myList[index].windSpeed, myList[index].windDir, myList[index].chance_precip])
         setSelectedLink(myList[index].link)
     }
-
 
     //pass the correct JSX to return/render
     //this is the selection dropdown menu
@@ -229,7 +203,7 @@ const Accordion = (props) => {
     const getSortedList = (category) => {
 
         const peaksSorted = [...bulgerList];
-        //const peaksSorted = [...threePeaks];
+        
         if(category === 'temp asc'){
             peaksSorted.sort( compareTempASC );
         }
@@ -258,14 +232,19 @@ const Accordion = (props) => {
     <CalendarForm className='cal-form' mountain={selectedPeak} weather={selectedPeakWeather}></CalendarForm>
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
-            <Container className='scroll'>
+            <Container>
+            <div className='accordion-card'>
+            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
             <div className='option-bar'>
-                <button className='refresh'>Refresh Weather</button>
                 {selection}
             </div>
             {console.log(sortby)}
-            <div className='accordion-card'>
-            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+            <UpdateWeatherButton 
+                    id='refresh'
+                    peakList={props.data}  
+                    coordinates={props.coordinates}
+                    signalDBPull={props.signalDBPull} />
+            
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
                 return(

@@ -3,6 +3,8 @@ import { db } from './../firebase.js';
 import axios from "axios";
 import PropTypes from 'prop-types';
 import KEYS from "./firebase_api_key";
+import './stylesheets/UpdateWeatherButton.css';
+
 
 const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
@@ -45,12 +47,20 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     }
     // getNextSaturdayWeatherAPI()
 
-    const getNextSaturdayNWS = () => {
-        // {
-        //     "number": 6,
-        //     "name": "Wednesday Night",
-        //     "startTime": "2022-02-16T18:00:00-08:00",
-        //     "endTime": "2022-02-17T06:00:00-08:00",
+
+    const getNextSaturdayNWS = (data) => {
+        const forecast = new Date();
+        const day = forecast.getDay();
+
+        // Retrieves upcoming Saturday/Sunday's daytime forecast - 06:00-08:00
+        // Return index that matches named forecast for "Saturday" or "Sunday"
+        if (day === 0) {
+            const forecast = data.findIndex(period => period.name === "Sunday");
+            return forecast;
+        } else {
+            const forecast = data.findIndex(period => period.name === "Saturday");
+            return forecast;
+        }
     }
 
 
@@ -73,42 +83,48 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                 
                 // Date of forecast Saturday 
                 const date = getNextSaturdayWeatherAPI();
-                console.log({date})
+                
+                // Forecast Weather API calls
+                axios
+                .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                .then((res) => {
+                    const now = res.data.forecast.forecastday[0].hour[12];
+                    // Updates precip data in DB
+                    update(ref(db, 'peaks/' + key), {
+                    chance_precip: now.chance_of_rain,
+                });
+                }).catch((err) => {
+                    console.log(err.data);
+                });
 
-                    // Forecast Weather API calls
-                    axios
-                    .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
-                    .then((res) => {
-                        const now = res.data.forecast.forecastday[0].hour[12];
-                        // Updates temperature data in DB
-                        update(ref(db, 'peaks/' + key), {
-                        chance_precip: now.chance_of_rain,
+                axios
+                .get(`${NWSURL}/${lat},${lon}`)
+                .then((res) => {
+                    const forecast_link = res.data.properties.forecast
+                    return axios.get(`${forecast_link}`);
+                })
+                .then((res) => {
+                    // Retrieves entire forecast
+                    let forecastAll = res.data.properties.periods;
+                    // Finds index for named "Saturday" forecast
+                    let index = getNextSaturdayNWS(forecastAll);
+                    // Gets forecast data for Saturday
+                    let saturday = forecastAll[index];
+                    let temp = saturday.temperature;
+                    let windDirection = `${saturday.windDirection}`;
+                    let windSpeed = saturday.windSpeed;
+                    
+                    // Formats windSpeed
+                    windSpeed = windSpeed.slice(0, 2);
+                    windSpeed = windSpeed.replaceAll(' ', '');
+                    
+                    // Updates temperature data in DB
+                    update(ref(db, 'peaks/' + key), {
+                        temp: temp,
+                        wind_speed: parseInt(windSpeed),
+                        wind_direction: windDirection,
                     });
                     })
-                    // .get(`${NWSURL}/${lat},${lon}`)
-                    // .then((res) => {
-                    //     const forecast_link = res.data.properties.forecast
-                    //     return axios.get(`${forecast_link}`);
-                    // })
-                    // .then((res) => {
-                    //     // Today's forecast
-                    //     console.log(res)
-                    //     let today = res.data.properties.periods[0];
-                    //     let temp = today.temperature;
-                    //     let windDirection = `${today.windDirection}`;
-                    //     let windSpeed = today.windSpeed;
-                        
-                    //     // Format windSpeed
-                    //     windSpeed = windSpeed.slice(0, 2);
-                    //     windSpeed = windSpeed.replaceAll(' ', '');
-                        
-                    //     // Updates temperature data in DB
-                    //     update(ref(db, 'peaks/' + key), {
-                    //         temp: temp,
-                    //         wind_speed: parseInt(windSpeed),
-                    //         wind_direction: windDirection,
-                    //     });
-                    // })
                     .catch((err) => {
                         console.log(err.data);
                     });
@@ -120,7 +136,8 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
     return (
         <>
-            <button onClick={() => updateWeather()}>Refresh Weather</button>
+            <button className='refresh' onClick={() => updateWeather()}>Refresh Weather</button>
+            <p>Last Refreshed: 2022-02-12 00:00</p>
         </>
     )
 };

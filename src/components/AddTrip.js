@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import '../components/stylesheets/Misc.css'
+import '../components/stylesheets/Misc.css';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
 
 

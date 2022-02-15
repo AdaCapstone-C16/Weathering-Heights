@@ -6,8 +6,6 @@ const BadgeDisplay = ({ badges, style }) => {
     // Generate badge components from array of badges 
     const badgeComponents = badges.map((badge, index) => {
         // Create alt text for badge img
-        // /(?<=^badges\/)(.*)(.*)\.[^.]+$/
-        
         const re = /(?<=^badges\/)(.*)(.*)\.[^.]+$/
         let altText = re.exec(badge);
         altText = altText[1];
