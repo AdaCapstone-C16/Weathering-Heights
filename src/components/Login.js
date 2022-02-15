@@ -27,7 +27,7 @@ export default function Login() {
         }
     
 return (
-    <Container>
+    <Container style={{background: "none"}}>
         <Card id="login-card">
             <Card.Body>
                 <h2 className='popup-header text-center mb-4'> Login</h2>

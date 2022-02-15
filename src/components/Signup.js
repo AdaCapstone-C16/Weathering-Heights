@@ -36,42 +36,40 @@ export default function Signup() {
     }
 
     return (
-    <Container>
-        <Card id="signup-card">
-            <Card.Body>
-                <h2 className='popup-header text-center mb-4'> Sign Up</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group id='fname'>
-                        <Form.Label className="popup-label">First Name</Form.Label>
-                        <Form.Control className="form-field" type="text" ref={fNameRef} required></Form.Control>
-                    </Form.Group>
-                    <Form.Group id='lname'>
-                        <Form.Label className="popup-label">Last Name</Form.Label>
-                        <Form.Control className="form-field" type="text" ref={lNameRef} required></Form.Control>
-                    </Form.Group>
-                    <Form.Group id='email'>
-                        <Form.Label className="popup-label">Email</Form.Label>
-                        <Form.Control className="form-field" type="email" ref={emailRef} required></Form.Control>
-                    </Form.Group>
-                    <Form.Group id='password'>
-                        <Form.Label className="popup-label">Password</Form.Label>
-                        <Form.Control className="form-field" type="password" ref={passwordRef} required></Form.Control>
-                    </Form.Group>
-                    <Form.Group id='password-confirm'>
-                        <Form.Label className="popup-label">Password Confirmation</Form.Label>
-                        <Form.Control className="form-field" type="password" ref={passwordConfirmRef} required></Form.Control>
-                    </Form.Group>
-                    <Button disabled={loading} id="signup-button" className="w-100 text-center mt-2" type="submit">Sign Up</Button>
-                </Form>
+        <Container style={{background: "none"}}>
+            <Card id="signup-card">
+                <Card.Body>
+                    <h2 className='popup-header text-center mb-4'> Sign Up</h2>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group id='fname'>
+                            <Form.Label className="popup-label">First Name</Form.Label>
+                            <Form.Control className="form-field" type="text" ref={fNameRef} required></Form.Control>
+                        </Form.Group>
+                        <Form.Group id='lname'>
+                            <Form.Label className="popup-label">Last Name</Form.Label>
+                            <Form.Control className="form-field" type="text" ref={lNameRef} required></Form.Control>
+                        </Form.Group>
+                        <Form.Group id='email'>
+                            <Form.Label className="popup-label">Email</Form.Label>
+                            <Form.Control className="form-field" type="email" ref={emailRef} required></Form.Control>
+                        </Form.Group>
+                        <Form.Group id='password'>
+                            <Form.Label className="popup-label">Password</Form.Label>
+                            <Form.Control className="form-field" type="password" ref={passwordRef} required></Form.Control>
+                        </Form.Group>
+                        <Form.Group id='password-confirm'>
+                            <Form.Label className="popup-label">Password Confirmation</Form.Label>
+                            <Form.Control className="form-field" type="password" ref={passwordConfirmRef} required></Form.Control>
+                        </Form.Group>
+                        <Button disabled={loading} id="signup-button" className="w-100 text-center mt-2" type="submit">Sign Up</Button>
+                    </Form>
 
-                <div className="w-100 text-center mt-2">
-                    Already have an account? <Link className="popup-link" to='/login'>Login</Link>
-                </div>
-            </Card.Body>
-        </Card>
-        
-    </Container>
-    
+                    <div className="w-100 text-center mt-2">
+                        Already have an account? <Link className="popup-link" to='/login'>Login</Link>
+                    </div>
+                </Card.Body>
+            </Card>
+        </Container>
     )
 }

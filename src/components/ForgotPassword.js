@@ -28,7 +28,7 @@ export default function ForgotPassword() {
         }
     
 return (
-    <Container>
+    <Container style={{background: "none"}}>
         <Card id="reset-password-card">
             <Card.Body>
                 <h2 className='popup-header text-center mb-4'> Password Reset</h2>
