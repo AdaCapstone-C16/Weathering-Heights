@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import KEYS from "./firebase_api_key";
 import './stylesheets/UpdateWeatherButton.css';
 
+
 const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
     const formatDate = (date) => {
@@ -44,6 +45,8 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
             return saturdayDate;
         }
     }
+    // getNextSaturdayWeatherAPI()
+
 
     const getNextSaturdayNWS = (data) => {
         const forecast = new Date();
@@ -59,6 +62,7 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
             return forecast;
         }
     }
+
 
     // Pulls new data from weather API, posts to DB
     const updateWeather = () => {
@@ -120,10 +124,10 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                         wind_speed: parseInt(windSpeed),
                         wind_direction: windDirection,
                     });
-                })
-                .catch((err) => {
-                    console.log(err.data);
-                });
+                    })
+                    .catch((err) => {
+                        console.log(err.data);
+                    });
             }
             // Initiate new pull from DB to update state 
             signalDBPull();

@@ -39,6 +39,14 @@ const Container = styled.div`
         margin-bottom: 1%;
         float: right;
     }
+    .scroll {
+        height:675px;
+    }
+    
+    .scroll {
+        overflow:hidden; 
+        overflow-y:scroll;
+    }
 `;
 
 const Wrap = styled.div`
@@ -228,11 +236,6 @@ const Accordion = (props) => {
             <div className='accordion-card'>
             <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
             <div className='option-bar'>
-                {/* <UpdateWeatherButton 
-                    id='refresh'
-                    peakList={props.data}  
-                    coordinates={props.coordinates}
-                    signalDBPull={props.signalDBPull} /> */}
                 {selection}
             </div>
             {console.log(sortby)}
