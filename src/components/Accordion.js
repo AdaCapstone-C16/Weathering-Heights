@@ -138,6 +138,10 @@ const Accordion = (props) => {
 
     const [weatherFor, setWeatherFor] = useState();
 
+    const updateWeatherFor = (date) => {
+        setWeatherFor(date);
+    }
+
     const handleMapPopup = () => {
         setMapPopup(true)
         bulgerList.forEach(peak => {
@@ -231,6 +235,7 @@ const Accordion = (props) => {
 
     return (
     <div>
+
     <CalendarForm className='cal-form' mountain={selectedPeak} weather={selectedPeakWeather}></CalendarForm>
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
@@ -246,7 +251,7 @@ const Accordion = (props) => {
                                 peakList={props.data}  
                                 coordinates={props.coordinates}
                                 signalDBPull={props.signalDBPull}
-                                setWeatherFor={setWeatherFor} />
+                                updateWeatherFor={updateWeatherFor} />
             
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 

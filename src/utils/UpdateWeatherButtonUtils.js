@@ -19,10 +19,10 @@ export const getNextSaturdayWeatherAPI = () => {
     const day = forecast.getDay();
     const date = forecast.getDate();
     
-    // Pull current weather for Sunday
+    // For Sunday
     if (day === 0) 
         return forecast;
-    // Pull current weather for Saturday
+    // For Saturday
     else if (day === 6) 
         return forecast;
     // All other days of the week will pull from upcoming Saturday
@@ -32,7 +32,7 @@ export const getNextSaturdayWeatherAPI = () => {
         forecast.setDate(newDate);
         
         const saturdayDate = formatDate(forecast)
-        return saturdayDate;
+        return [forecast, saturdayDate];
     }
 }
 

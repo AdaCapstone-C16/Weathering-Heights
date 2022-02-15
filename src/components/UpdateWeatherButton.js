@@ -7,7 +7,7 @@ import KEYS from "./firebase_api_key";
 import { getNextSaturdayNWS, getNextSaturdayWeatherAPI } from '../utils/UpdateWeatherButtonUtils';
 import './stylesheets/UpdateWeatherButton.css';
 
-const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull, setWeatherFor }) => {
+const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull, updateWeatherFor }) => {
     const [lastPull, setLastPull] =  useState();
 
     // Populates last weather pull timestamp from db
@@ -37,6 +37,15 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull, setWeatherFo
 
         if (coordinates !== []) {
             // Make API call for each set of peak coordinates
+
+            // Weekend date formatted for render
+            let forecast = getNextSaturdayWeatherAPI()[0];
+            forecast.setHours(6, 0, 0);
+            forecast = forecast.toLocaleTimeString(undefined, options)
+
+            // Weekend date formatted for API call
+            const date = getNextSaturdayWeatherAPI()[1];
+
             for (let i = 0; i < Object.keys(coordinates).length; i++) {
                 // Lat, Lon truncated to four decimals
                 let lat = parseFloat(coordinates[i].lat)
@@ -46,61 +55,62 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull, setWeatherFo
                 
                 let key = peakList[i].key;
                 
-                // Date of forecast Saturday 
-                const date = getNextSaturdayWeatherAPI();
-                
                 // Forecast Weather API calls
-                axios
-                .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
-                .then((res) => {
-                    const now = res.data.forecast.forecastday[0].hour[12];
-                    // Updates precip data in DB
-                    update(ref(db, 'peaks/' + key), {
-                        chance_precip: now.chance_of_rain,
-                    });
-                }).catch((err) => {
-                    console.log(err.data);
-                });
+                // axios
+                // .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                // .then((res) => {
+                //     const now = res.data.forecast.forecastday[0].hour[6];
+                //     // Updates precip data in DB
+                //     update(ref(db, 'peaks/' + key), {
+                //         chance_precip: now.chance_of_rain,
+                //     });
+                // }).catch((err) => {
+                //     console.log(err.data);
+                // });
 
-                axios
-                .get(`${NWSURL}/${lat},${lon}`)
-                .then((res) => {
-                    console.log("are we even getting here")
-                    const forecast_link = res.data.properties.forecast
-                    return axios.get(`${forecast_link}`);
-                })
-                .then((res) => {
-                    // Retrieves entire forecast
-                    let forecastAll = res.data.properties.periods;
-                    // Finds index for named "Saturday" forecast
-                    let index = getNextSaturdayNWS(forecastAll);
-                    // Gets forecast data for Saturday
-                    let saturday = forecastAll[index];
-                    let temp = saturday.temperature;
-                    let windDirection = `${saturday.windDirection}`;
-                    let windSpeed = saturday.windSpeed;
+                // axios
+                // .get(`${NWSURL}/${lat},${lon}`)
+                // .then((res) => {
+                //     console.log("are we even getting here")
+                //     const forecast_link = res.data.properties.forecast
+                //     return axios.get(`${forecast_link}`);
+                // })
+                // .then((res) => {
+                //     // Retrieves entire forecast
+                //     let forecastAll = res.data.properties.periods;
+                //     // Finds index for named "Saturday" forecast
+                //     let index = getNextSaturdayNWS(forecastAll);
+                //     // Gets forecast data for Saturday
+                //     let saturday = forecastAll[index];
+                //     let temp = saturday.temperature;
+                //     let windDirection = `${saturday.windDirection}`;
+                //     let windSpeed = saturday.windSpeed;
                     
-                    // Formats windSpeed
-                    windSpeed = windSpeed.slice(0, 2);
-                    windSpeed = windSpeed.replaceAll(' ', '');
+                //     // Formats windSpeed
+                //     windSpeed = windSpeed.slice(0, 2);
+                //     windSpeed = windSpeed.replaceAll(' ', '');
                     
-                    // Updates temperature data in DB
-                    update(ref(db, 'peaks/' + key), {
-                        temp: temp,
-                        wind_speed: parseInt(windSpeed),
-                        wind_direction: windDirection,
-                    });
-                })
-                .catch((err) => {
-                    console.log(err.data);
-                });
+                //     // Updates temperature data in DB
+                //     update(ref(db, 'peaks/' + key), {
+                //         temp: temp,
+                //         wind_speed: parseInt(windSpeed),
+                //         wind_direction: windDirection,
+                //     });
+                // })
+                // .catch((err) => {
+                //     console.log(err.data);
+                // });
             }
             // Initiate new pull from DB to update state 
             signalDBPull();
+
+            // Update db & state for time of weather forecast
+            update(ref(db, '/last_weather_pull'), {forecast: forecast});
+            updateWeatherFor(forecast);
         }
+        // Update db & state for timestamp of weather refresh
         update(ref(db, '/last_weather_pull'), {time: timestamp});
         setLastPull(timestamp);
-        setWeatherFor("NOW");
     }
     
     return (
