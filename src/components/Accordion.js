@@ -233,17 +233,17 @@ const Accordion = (props) => {
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
             <Container>
-            <div className='accordion-card'>
-            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
-            <div className='option-bar'>
-                {selection}
-            </div>
-            {console.log(sortby)}
-            <UpdateWeatherButton 
-                    id='refresh'
-                    peakList={props.data}  
-                    coordinates={props.coordinates}
-                    signalDBPull={props.signalDBPull} />
+                <div className='accordion-card'>
+                    <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+                        <div className='option-bar'>
+                        {selection}
+                        </div>
+                        {console.log(sortby)}
+                        <UpdateWeatherButton 
+                                id='refresh'
+                                peakList={props.data}  
+                                coordinates={props.coordinates}
+                                signalDBPull={props.signalDBPull} />
             
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
