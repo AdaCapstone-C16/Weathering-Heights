@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MyPeak from './MyPeak'
-import '../components/stylesheets/MyPeakList.css'
+import MyPeak from './MyPeak';
+import '../components/stylesheets/MyPeakList.css';
 
 const MyPeakList = ({ peaks, updateList }) => {
     const peaksLength = peaks.length; 

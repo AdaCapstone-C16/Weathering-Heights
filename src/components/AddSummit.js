@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import '../components/stylesheets/AddSummit.css'
-import Select from 'react-select'
+import '../components/stylesheets/AddSummit.css';
+import Select from 'react-select';
 import PropTypes from 'prop-types';
 
 const AddSummit = ({trigger, setTrigger, data, handleAddSummit}) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../components/stylesheets/DeleteSummit.css'
-import 'react-datepicker/dist/react-datepicker.css'
+import '../components/stylesheets/DeleteSummit.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
 
 const DeleteSummit = ({trigger, setTrigger, deleteSummit}) => {

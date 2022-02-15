@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import '../components/stylesheets/UpdateTrip.css'
-import 'react-datepicker/dist/react-datepicker.css'
+import '../components/stylesheets/UpdateTrip.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
 
 
-const UpdateTrip = ({trigger, setTrigger, updateTrip, date}) => {
+const UpdateTrip = ({ trigger, setTrigger, updateTrip, date }) => {
     const [tripNotes, setTripNotes] = useState(null)
 
     const handleTripNotes = (input) => {

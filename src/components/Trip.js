@@ -2,8 +2,8 @@ import React, {useState } from 'react';
 import PropTypes from 'prop-types';
 import DeleteTrip from './DeleteTrip';
 import UpdateTrip from './UpdateTrip';
-import '../components/stylesheets/Misc.css'
-import '../components/stylesheets/Trip.css'
+import '../components/stylesheets/Misc.css';
+import '../components/stylesheets/Trip.css';
 
 
 const Trip = ({date, desc, deleteTrip, updateTrip}) => {

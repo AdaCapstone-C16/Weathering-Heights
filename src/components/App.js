@@ -13,12 +13,11 @@ import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
 import Homepage from './Homepage';
 import MyProfile from './MyProfile';
-import Map from './Map'
+import Map from './Map';
 import UpdateWeatherButton from './UpdateWeatherButton.js';
 import { createBrowserHistory } from "history";
 
 function App() {
-  // console.log(FIREBASE_API_KEY)
   const [peakList, setPeakList] = useState([]);
   const [coordinates, setCoordinates] = useState([]);
 
