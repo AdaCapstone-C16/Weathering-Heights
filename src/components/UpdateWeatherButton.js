@@ -44,11 +44,19 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
         }
     }
 
-    const getNextSaturdayNWS = (date, data) => {
-        // Retrieves upcoming Saturday's daytime forecast at 06:00-08:00
-        // Find index that matches named forecast for "Saturday"
-        const forecast = data.findIndex(period => period.name === "Saturday");
-        return forecast;
+    const getNextSaturdayNWS = (data) => {
+        const forecast = new Date();
+        const day = forecast.getDay();
+
+        // Retrieves upcoming Saturday/Sunday's daytime forecast - 06:00-08:00
+        // Return index that matches named forecast for "Saturday" or "Sunday"
+        if (day === 0) {
+            const forecast = data.findIndex(period => period.name === "Sunday");
+            return forecast;
+        } else {
+            const forecast = data.findIndex(period => period.name === "Saturday");
+            return forecast;
+        }
     }
 
     // Pulls new data from weather API, posts to DB
@@ -73,14 +81,18 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                 
                 // Forecast Weather API calls
                 axios
-                // .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
-                // .then((res) => {
-                //     const now = res.data.forecast.forecastday[0].hour[12];
-                //     // Updates temperature data in DB
-                //     update(ref(db, 'peaks/' + key), {
-                //     chance_precip: now.chance_of_rain,
-                // });
-                // })
+                .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                .then((res) => {
+                    const now = res.data.forecast.forecastday[0].hour[12];
+                    // Updates precip data in DB
+                    update(ref(db, 'peaks/' + key), {
+                    chance_precip: now.chance_of_rain,
+                });
+                }).catch((err) => {
+                    console.log(err.data);
+                });
+
+                axios
                 .get(`${NWSURL}/${lat},${lon}`)
                 .then((res) => {
                     const forecast_link = res.data.properties.forecast
@@ -90,7 +102,7 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                     // Retrieves entire forecast
                     let forecastAll = res.data.properties.periods;
                     // Finds index for named "Saturday" forecast
-                    let index = getNextSaturdayNWS(date, forecastAll);
+                    let index = getNextSaturdayNWS(forecastAll);
                     // Gets forecast data for Saturday
                     let saturday = forecastAll[index];
                     let temp = saturday.temperature;
