@@ -8,7 +8,7 @@
     margin-left: 3%;
     font-size: 2.25rem;
     font-weight: 300;
-    padding-bottom: 2%;
+    /* padding-bottom: 2%; */
     text-align: left;
 }
 
@@ -51,4 +51,12 @@
     font-size: 16px;
     transition: all .1s ease;
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}
+
+.weather-for {
+    /* margin: 0 0 0 2.5%;
+    padding: 2% 0%; */
+
+    margin: 0 0 1em 0;
+    padding: 10px 40px 0;
 }

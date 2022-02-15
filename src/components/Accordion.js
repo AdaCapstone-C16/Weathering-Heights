@@ -1,6 +1,8 @@
 //for all purposes, this is basically the peakList 
 //-----------------------------------------------{imports}------------------------------------------------------//
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ref, get } from "firebase/database";
+import { db } from './../firebase.js';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -136,7 +138,20 @@ const Accordion = (props) => {
     const [mapPopup, setMapPopup] = useState(false)
     const [selectedLink, setSelectedLink] = useState(null)
 
-    const [weatherFor, setWeatherFor] = useState();
+    const [weatherFor, setWeatherFor] = useState(null);
+
+    useEffect(() => {
+        get(ref(db, '/last_weather_pull'))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+              const data = snapshot.val();
+              const forecast = data.forecast;
+              updateWeatherFor(forecast);
+            } else {
+              console.log("No data available");
+            }
+        })
+    }, [])
 
     const updateWeatherFor = (date) => {
         setWeatherFor(date);
@@ -242,16 +257,19 @@ const Accordion = (props) => {
             <Container>
                 <div className='accordion-card'>
                     <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+                        <div className="weather-for">Weather for: {weatherFor}</div>
                         <div className='option-bar'>
-                        {selection}
+                            {selection}
                         </div>
                         {console.log(sortby)}
+                        
                         <UpdateWeatherButton 
                                 id='refresh'
                                 peakList={props.data}  
                                 coordinates={props.coordinates}
                                 signalDBPull={props.signalDBPull}
                                 updateWeatherFor={updateWeatherFor} />
+                        
             
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
