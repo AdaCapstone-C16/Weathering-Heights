@@ -5,7 +5,7 @@ import { ref, get, child } from "firebase/database";
 import { db } from './../firebase.js';
 import { AuthProvider } from '../contexts/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { getBulgerListCoords } from '../api/BulgerAPI';
+import { getBulgerListCoords } from '../utils/BulgerCoords';
 import Navigation from './Navigation';
 import Login from './Login';
 import Signup from './Signup';
@@ -30,7 +30,6 @@ function App() {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log(data)
         for (let i = 0; i < data.length; i++) {
             if (data[i]) { 
                 bulgerListArr.push({

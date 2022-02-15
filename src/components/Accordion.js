@@ -136,6 +136,8 @@ const Accordion = (props) => {
     const [mapPopup, setMapPopup] = useState(false)
     const [selectedLink, setSelectedLink] = useState(null)
 
+    const [weatherFor, setWeatherFor] = useState();
+
     const handleMapPopup = () => {
         setMapPopup(true)
         bulgerList.forEach(peak => {
@@ -243,7 +245,8 @@ const Accordion = (props) => {
                                 id='refresh'
                                 peakList={props.data}  
                                 coordinates={props.coordinates}
-                                signalDBPull={props.signalDBPull} />
+                                signalDBPull={props.signalDBPull}
+                                setWeatherFor={setWeatherFor} />
             
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
