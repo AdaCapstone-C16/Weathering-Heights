@@ -56,50 +56,50 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull, updateWeathe
                 let key = peakList[i].key;
                 
                 // Forecast Weather API calls
-                // axios
-                // .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
-                // .then((res) => {
-                //     const now = res.data.forecast.forecastday[0].hour[6];
-                //     // Updates precip data in DB
-                //     update(ref(db, 'peaks/' + key), {
-                //         chance_precip: now.chance_of_rain,
-                //     });
-                // }).catch((err) => {
-                //     console.log(err.data);
-                // });
+                axios
+                .get(`${WeatherAPIURL}&q=${lat},${lon}&dt=${date}&aqi=no`)
+                .then((res) => {
+                    const now = res.data.forecast.forecastday[0].hour[6];
+                    // Updates precip data in DB
+                    update(ref(db, 'peaks/' + key), {
+                        chance_precip: now.chance_of_rain,
+                    });
+                }).catch((err) => {
+                    console.log(err.data);
+                });
 
-                // axios
-                // .get(`${NWSURL}/${lat},${lon}`)
-                // .then((res) => {
-                //     console.log("are we even getting here")
-                //     const forecast_link = res.data.properties.forecast
-                //     return axios.get(`${forecast_link}`);
-                // })
-                // .then((res) => {
-                //     // Retrieves entire forecast
-                //     let forecastAll = res.data.properties.periods;
-                //     // Finds index for named "Saturday" forecast
-                //     let index = getNextSaturdayNWS(forecastAll);
-                //     // Gets forecast data for Saturday
-                //     let saturday = forecastAll[index];
-                //     let temp = saturday.temperature;
-                //     let windDirection = `${saturday.windDirection}`;
-                //     let windSpeed = saturday.windSpeed;
+                axios
+                .get(`${NWSURL}/${lat},${lon}`)
+                .then((res) => {
+                    console.log("are we even getting here")
+                    const forecast_link = res.data.properties.forecast
+                    return axios.get(`${forecast_link}`);
+                })
+                .then((res) => {
+                    // Retrieves entire forecast
+                    let forecastAll = res.data.properties.periods;
+                    // Finds index for named "Saturday" forecast
+                    let index = getNextSaturdayNWS(forecastAll);
+                    // Gets forecast data for Saturday
+                    let saturday = forecastAll[index];
+                    let temp = saturday.temperature;
+                    let windDirection = `${saturday.windDirection}`;
+                    let windSpeed = saturday.windSpeed;
                     
-                //     // Formats windSpeed
-                //     windSpeed = windSpeed.slice(0, 2);
-                //     windSpeed = windSpeed.replaceAll(' ', '');
+                    // Formats windSpeed
+                    windSpeed = windSpeed.slice(0, 2);
+                    windSpeed = windSpeed.replaceAll(' ', '');
                     
-                //     // Updates temperature data in DB
-                //     update(ref(db, 'peaks/' + key), {
-                //         temp: temp,
-                //         wind_speed: parseInt(windSpeed),
-                //         wind_direction: windDirection,
-                //     });
-                // })
-                // .catch((err) => {
-                //     console.log(err.data);
-                // });
+                    // Updates temperature data in DB
+                    update(ref(db, 'peaks/' + key), {
+                        temp: temp,
+                        wind_speed: parseInt(windSpeed),
+                        wind_direction: windDirection,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err.data);
+                });
             }
             // Initiate new pull from DB to update state 
             signalDBPull();
