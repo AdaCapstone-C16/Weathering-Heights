@@ -91,8 +91,8 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                     const now = res.data.forecast.forecastday[0].hour[12];
                     // Updates precip data in DB
                     update(ref(db, 'peaks/' + key), {
-                    chance_precip: now.chance_of_rain,
-                });
+                        chance_precip: now.chance_of_rain,
+                    });
                 }).catch((err) => {
                     console.log(err.data);
                 });
@@ -124,10 +124,10 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
                         wind_speed: parseInt(windSpeed),
                         wind_direction: windDirection,
                     });
-                    })
-                    .catch((err) => {
-                        console.log(err.data);
-                    });
+                })
+                .catch((err) => {
+                    console.log(err.data);
+                });
             }
             // Initiate new pull from DB to update state 
             signalDBPull();
