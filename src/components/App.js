@@ -1,11 +1,10 @@
 //from main
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { ref, onValue, get, child } from "firebase/database";
+import { ref, get, child } from "firebase/database";
 import { db } from './../firebase.js';
-import { Container } from 'react-bootstrap';
 import { AuthProvider } from '../contexts/AuthContext';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getBulgerListCoords } from '../api/BulgerAPI';
 import Navigation from './Navigation';
 import Login from './Login';
@@ -14,7 +13,6 @@ import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
 import Homepage from './Homepage';
 import MyProfile from './MyProfile';
-// import Thanks from './Thanks'
 import Map from './Map'
 import UpdateWeatherButton from './UpdateWeatherButton.js';
 import { createBrowserHistory } from "history";
@@ -80,9 +78,6 @@ function App() {
   const history = createBrowserHistory();
 
   return (
-      // <Container className="d-flex align-items-center" style={{ minHeight: "100vh" }}>
-      // <Container>
-
       <main>
         <UpdateWeatherButton 
           peakList={peakList}  
@@ -90,7 +85,6 @@ function App() {
           signalDBPull={signalDBPull} />
 
         <div>
-          {/* <Router basename="/Weathering-Heights"> */}
           <Router basename='/Weathering-Heights' history={history}>
             <AuthProvider>
               <Navigation />
@@ -101,17 +95,13 @@ function App() {
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route exact path="/map" element={<Map/>}/>
-                {/* <Route path="/thanks" element={<Thanks/>}/> */}
                 <Route path="/" element={<Homepage data={peakList}/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
               </Routes>
             </AuthProvider>
           </Router>
         </div>
-        
       </main>
-      // </Container>
-    
   )
 }
 
