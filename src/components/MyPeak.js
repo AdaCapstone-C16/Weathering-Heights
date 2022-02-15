@@ -95,7 +95,7 @@ const MyPeak = ({ pKey, id, name, range, trips, updateList, numPeaks, handleUpda
             <>
                 <section onClick={()=> toggle(id)} className="accordion-top">
                     <div className="grid-container">
-                        <p className="bigItem">{id}. {name.toUpperCase()}</p>
+                        <p className="peak-name">{id}. {name.toUpperCase()}</p>
                     </div>
                     <span> {clicked === id? <FiMinus style={{color:'#CCA19A'}}/> : <FiPlus style={{color:'#CCA19A'}}/>}</span>
                 </section>

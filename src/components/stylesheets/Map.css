@@ -33,13 +33,15 @@
 
 .mtitle-2 {
     color: black;
-    font-size: larger;
+    font-size: large;
+    margin-right:0%
+
 }
 
 .mtitle-3 {
     color: black;
     padding-left: 10%;
-    font-size: larger;
+    font-size: large;
 }
 .mbutton {
     margin: 5%;
@@ -55,6 +57,7 @@
     background: #CCA19A;
     line-height: 1.15;
     font-size: 16px;
+    padding-left: 5%;
 }
 
 .mbutton:hover {
@@ -70,6 +73,8 @@
     font-size: 16px;
     transition: all .1s ease;
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+    padding-left: 5%;
+
 }
 
 .map {

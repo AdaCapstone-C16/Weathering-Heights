@@ -13,7 +13,7 @@ export default function Map({trigger, setTrigger, index, name, link}) {
         <div className='mpopup'>
             <div className='mpopup-inner'>
                 <h3 className='mtitle'>{name} Map</h3>
-                <p className='mtitle-2'>The following map shows climber gps tracks from successful summits</p>
+                <p className='mtitle-2'>Climber gps tracks from successful summits:</p>
                 <iframe className='map' title="myMap" src={mapURL}  width="500" height="500"></iframe>
                 <p className='mtitle-3'>See <a href={peakLink}>Peak Baggers</a> to download gpx files.</p>
                 <div className='m-inner-button-loc'>
