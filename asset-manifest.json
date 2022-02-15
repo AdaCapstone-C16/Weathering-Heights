@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Weathering-Heights/static/css/main.e641d889.css",
-    "main.js": "/Weathering-Heights/static/js/main.261198d5.js",
+    "main.css": "/Weathering-Heights/static/css/main.05c543d2.css",
+    "main.js": "/Weathering-Heights/static/js/main.a255bb14.js",
     "static/media/test.jpg": "/Weathering-Heights/static/media/test.05e23571efa56bce0ca5.jpg",
     "index.html": "/Weathering-Heights/index.html",
-    "main.e641d889.css.map": "/Weathering-Heights/static/css/main.e641d889.css.map",
-    "main.261198d5.js.map": "/Weathering-Heights/static/js/main.261198d5.js.map"
+    "main.05c543d2.css.map": "/Weathering-Heights/static/css/main.05c543d2.css.map",
+    "main.a255bb14.js.map": "/Weathering-Heights/static/js/main.a255bb14.js.map"
   },
   "entrypoints": [
-    "static/css/main.e641d889.css",
-    "static/js/main.261198d5.js"
+    "static/css/main.05c543d2.css",
+    "static/js/main.a255bb14.js"
   ]
 }
