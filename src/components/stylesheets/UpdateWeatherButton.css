@@ -1,30 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,500');
-
-.accordion-card{
-    margin-top: 1%;
-    margin-bottom: 5%;
-}
-.accordion-title{
-    margin-left: 3%;
-    font-size: 2.25rem;
-    font-weight: 300;
-    padding-bottom: 2%;
-    text-align: left;
-}
-
-.sort-form{
-    padding-right: 5%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-}
-
-.seemap-btn-loc {
-    padding-left: 40%;
-    padding-top: 2.5%;
-}
-
-.seemap-btn {
-    margin: 5%;
+.refresh {
+    margin: 0 0 0 2.5%;
     display: inline-block;    
     border-radius: 66px;
     outline: none;
@@ -35,11 +10,10 @@
     background: #CCA19A;
     line-height: 1.15;
     font-size: 16px;
-    padding-right: 15%;
     border: none;
 }
 
-.seemap-btn:hover {
+.refresh:hover {
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -51,4 +25,10 @@
     font-size: 16px;
     transition: all .1s ease;
     box-shadow: 0 0 0 0 blue, 0 0 0 3px #CCA19A;
+}
+
+p {
+    margin: 0 0 1em 0;
+    padding: 0px 40px;
+    font-size: .5em;
 }

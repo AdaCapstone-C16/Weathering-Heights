@@ -3,6 +3,7 @@ import { db } from './../firebase.js';
 import axios from "axios";
 import PropTypes from 'prop-types';
 import KEYS from "./firebase_api_key";
+import './stylesheets/UpdateWeatherButton.css';
 
 const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
@@ -131,7 +132,8 @@ const UpdateWeatherButton = ({ coordinates, peakList, signalDBPull }) => {
     
     return (
         <>
-            <button onClick={() => updateWeather()}>Refresh Weather</button>
+            <button className='refresh' onClick={() => updateWeather()}>Refresh Weather</button>
+            <p>Last Refreshed: 2022-02-12 00:00</p>
         </>
     )
 };

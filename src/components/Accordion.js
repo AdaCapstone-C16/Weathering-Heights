@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import CalendarForm from './CalendarForm';
-import './stylesheets/Accordion.css';
+import UpdateWeatherButton from './UpdateWeatherButton';
 import Map from './Map';
+import './stylesheets/Accordion.css';
 import './stylesheets/Map.css';
 
 // import peaksContext from '../contexts/peaksContext';
@@ -149,7 +150,6 @@ const Accordion = (props) => {
         setSelectedLink(myList[index].link)
     }
 
-
     //pass the correct JSX to return/render
     //this is the selection dropdown menu
     let option = null;
@@ -225,13 +225,23 @@ const Accordion = (props) => {
     <IconContext.Provider value={{color : '#CCA19A', size : '25px'}}>
         <AccordionSection>
             <Container>
+            <div className='accordion-card'>
+            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
             <div className='option-bar'>
-                <button className='refresh'>Refresh Weather</button>
+                {/* <UpdateWeatherButton 
+                    id='refresh'
+                    peakList={props.data}  
+                    coordinates={props.coordinates}
+                    signalDBPull={props.signalDBPull} /> */}
                 {selection}
             </div>
             {console.log(sortby)}
-            <div className='accordion-card'>
-            <div className='accordion-title'>The Bulger List: Washington's Tallest 100 Peaks</div>
+            <UpdateWeatherButton 
+                    id='refresh'
+                    peakList={props.data}  
+                    coordinates={props.coordinates}
+                    signalDBPull={props.signalDBPull} />
+            
             {/* <p>Washington's Tallest 100 Peaks</p> */}
             {getSortedList(sortby).map((item, index) => { 
                 return(

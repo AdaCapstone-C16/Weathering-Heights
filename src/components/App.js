@@ -14,7 +14,6 @@ import ForgotPassword from './ForgotPassword';
 import Homepage from './Homepage';
 import MyProfile from './MyProfile';
 import Map from './Map';
-import UpdateWeatherButton from './UpdateWeatherButton.js';
 import { createBrowserHistory } from "history";
 
 function App() {
@@ -78,11 +77,6 @@ function App() {
 
   return (
       <main>
-        <UpdateWeatherButton 
-          peakList={peakList}  
-          coordinates={coordinates}
-          signalDBPull={signalDBPull} />
-
         <div>
           <Router basename='/Weathering-Heights' history={history}>
             <AuthProvider>
@@ -94,7 +88,7 @@ function App() {
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route exact path="/map" element={<Map/>}/>
-                <Route path="/" element={<Homepage data={peakList}/>} />
+                <Route path="/" element={<Homepage data={peakList} coordinates={coordinates} signalDBPull={signalDBPull} />} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
               </Routes>
             </AuthProvider>
