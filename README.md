@@ -26,7 +26,7 @@ Project (High-Level)- Climbers can get a weather overview of peaks from the list
 ## Project Type
 Web Application
 
-## Main Front-End Technology
+## Front-End Technology
 - React
 
 ## Back-End Technologies
